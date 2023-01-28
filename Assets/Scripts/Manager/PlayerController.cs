@@ -16,13 +16,15 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
 
     }
-
-
-    private void FixedUpdate()
+    private void Update()
     {
         moveDirection = new Vector3(moveInput.x, moveInput.y, 0);
         moveDirection = Vector3.Normalize(moveDirection);
-        _rb.velocity = moveDirection * _speed;
+    }
+
+    private void FixedUpdate()
+    {
+        _rb.MovePosition(transform.position + moveDirection * _speed * Time.fixedDeltaTime);
     }
 
     private void OnMove(InputValue value)
