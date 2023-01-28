@@ -17,6 +17,8 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager.Instance.Init();
 
         AudioManager.Instance.Init();
+
+        PlayerController.Instance.Init();
     }
 
     public void QuitApplication()
