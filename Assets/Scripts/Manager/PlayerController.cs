@@ -1,4 +1,5 @@
 using BaseTemplate.Behaviours;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,10 @@ public class PlayerController : MonoSingleton<PlayerController>
 {
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] float _speed = 2f;
-    [SerializeField] GameObject _bullet;
     [SerializeField] Transform _bulletSpawn;
     [SerializeField] float fireRate = 0.5f;
 
+    Bullet _bullet;
     PlayerInput _playerInput;
 
     Vector2 moveInput;
@@ -58,8 +59,18 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             nextFire = Time.time + fireRate;
 
-            GameObject bullet = Instantiate(_bullet, _bulletSpawn.position, transform.rotation);
-            bullet.GetComponent<Rigidbody2D>().velocity = transform.right * 10f;
+            _bulletSpawn.DOLocalMoveX(.25f, fireRate / 2).OnComplete( () =>
+            {
+                _bulletSpawn.DOLocalMoveX(.3f, fireRate / 2);
+            });
+
+
+            GameObject bullet = PoolManager.Instance.GetPooledObject(0);
+            _bullet = bullet.GetComponent<Bullet>();
+            bullet.transform.position = _bulletSpawn.transform.position;
+            bullet.SetActive(true);
+
+            _bullet.Init(transform.right);
         }
     }
 }

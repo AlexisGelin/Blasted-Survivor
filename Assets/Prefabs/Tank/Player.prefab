@@ -419,8 +419,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 2462774669217252622}
   _speed: 2
-  _bullet: {fileID: 3034860985662891864, guid: e1349dd0689b3b24fa62202640c15d97, type: 3}
+  _bullet: {fileID: 0}
   _bulletSpawn: {fileID: 1432746450420732044}
+  fireRate: 0.5
 --- !u!50 &2462774669217252622
 Rigidbody2D:
   serializedVersion: 4
