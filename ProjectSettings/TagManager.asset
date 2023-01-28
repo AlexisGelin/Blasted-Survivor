@@ -15,7 +15,9 @@ TagManager:
   - 
   - 
   - 
-  - Post-Process
+  - Player
+  - 
+  - PlayerBullet
   - 
   - 
   - 
@@ -23,11 +25,9 @@ TagManager:
   - 
   - 
   - 
+  - Enemy
   - 
-  - 
-  - 
-  - 
-  - 
+  - EnemyBullet
   - 
   - 
   - 

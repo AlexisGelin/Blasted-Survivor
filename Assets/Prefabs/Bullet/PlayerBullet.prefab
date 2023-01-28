@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3034860985209186618}
   - component: {fileID: 3034860985209186613}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BulletSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 3034860985662891861}
   - component: {fileID: 7152765582376047678}
   - component: {fileID: -5116080803891623855}
-  m_Layer: 0
-  m_Name: Bullet
+  m_Layer: 12
+  m_Name: PlayerBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -168,10 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8b72da3e83f4947947aa355aa5275b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data:
-    Damage: 5
-    Penetration: 5
-    Speed: 5
   _rb: {fileID: 7152765582376047678}
   _bulletFace: {fileID: 3034860985209186613}
   _bulletFade: {fileID: 3034860986030667629}
@@ -184,7 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3034860985780814625}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3034860986030667634}
   - component: {fileID: 3034860986030667629}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BulletFade
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,10 +7,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
+    [SerializeField] TankData _data;
+
     [SerializeField] Rigidbody2D _rb;
-    [SerializeField] float _speed = 2f;
-    [SerializeField] Transform _bulletSpawn;
-    [SerializeField] float fireRate = 0.5f;
+    [SerializeField] Transform _canonTransform;
 
     Bullet _bullet;
     PlayerInput _playerInput;
@@ -20,10 +20,14 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     float nextFire = 0.0f;
 
+    public TankData Data { get => _data; }
+
     public void Init()
     {
         _playerInput = new PlayerInput();
         _playerInput.Enable();
+
+
     }
     private void Update()
     {
@@ -45,7 +49,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void FixedUpdate()
     {
-        _rb.MovePosition(transform.position + moveDirection * _speed * Time.fixedDeltaTime);
+        _rb.MovePosition(transform.position + moveDirection * _data.Speed * Time.fixedDeltaTime);
     }
 
     private void OnMove(InputValue value)
@@ -57,20 +61,19 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         if (Time.time > nextFire)
         {
-            nextFire = Time.time + fireRate;
+            nextFire = Time.time + _data.FireRate;
 
-            _bulletSpawn.DOLocalMoveX(.25f, fireRate / 2).OnComplete( () =>
+            _canonTransform.DOLocalMoveX(.25f, _data.FireRate / 2).OnComplete( () =>
             {
-                _bulletSpawn.DOLocalMoveX(.3f, fireRate / 2);
+                _canonTransform.DOLocalMoveX(.3f, _data.FireRate / 2); ;
             });
-
 
             GameObject bullet = PoolManager.Instance.GetPooledObject(0);
             _bullet = bullet.GetComponent<Bullet>();
-            bullet.transform.position = _bulletSpawn.transform.position;
+            bullet.transform.position = _canonTransform.transform.position;
             bullet.SetActive(true);
 
-            _bullet.Init(transform.right);
+            _bullet.Init(_data.Bullet,transform.right);
         }
     }
 }
