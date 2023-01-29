@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 6bc315c26bb80074e8be1f68cb5f7486, type: 2}
+  _upgradeData: {fileID: 11400000, guid: b4e4f85f987dc45479b0aa96fec1c2db, type: 2}
   _rb: {fileID: 2462774669217252622}
   _renderer: {fileID: 2462774668884844056}
 --- !u!50 &2462774669217252622

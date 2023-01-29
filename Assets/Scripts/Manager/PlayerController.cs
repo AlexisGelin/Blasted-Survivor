@@ -7,10 +7,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
-    [SerializeField] TankData _data;
+    [SerializeField] TankData _data, _upgradeData;
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] Transform _renderer;
-
 
     TankRenderer _tankRenderer;
     Bullet _bullet;
@@ -20,6 +19,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     Vector3 moveDirection;
 
     float nextFire = 0.0f;
+    int _health, _maxHealth;
 
     public TankData Data { get => _data; }
 
@@ -27,6 +27,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         _playerInput = new PlayerInput();
         _playerInput.Enable();
+
+        _upgradeData.ResetData();
 
         GenerateTank();
     }
@@ -44,6 +46,9 @@ public class PlayerController : MonoSingleton<PlayerController>
 
         var tempRenderer = Instantiate(_data.Renderer.Renderer, _renderer);
         _tankRenderer = tempRenderer.GetComponent<TankRenderer>();
+
+        _maxHealth = _data.Health + _upgradeData.Health;
+        _health = _data.Health + _upgradeData.Health;
     }
 
     private void Update()
@@ -63,10 +68,9 @@ public class PlayerController : MonoSingleton<PlayerController>
         if (_playerInput.Player.Fire.IsPressed()) Fire();
     }
 
-
     private void FixedUpdate()
     {
-        _rb.MovePosition(transform.position + moveDirection * _data.Speed * Time.fixedDeltaTime);
+        _rb.MovePosition(transform.position + moveDirection * (_data.Speed + _upgradeData.Speed) * Time.fixedDeltaTime);
     }
 
     private void OnMove(InputValue value)
@@ -78,23 +82,17 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         if (Time.time > nextFire)
         {
-            nextFire = Time.time + _data.FireRate;
+            nextFire = Time.time + _data.FireRate - _upgradeData.FireRate;
 
             foreach (var cannon in _tankRenderer._canonTransforms)
             {
-
- /*               cannon.DOLocalMoveX(.25f, _data.FireRate / 2).OnComplete(() =>
-                {
-                    cannon.DOLocalMoveX(.3f, _data.FireRate / 2);
-                });*/
-
                 GameObject bullet = PoolManager.Instance.GetPooledObject(0);
                 _bullet = bullet.GetComponent<Bullet>();
 
                 bullet.transform.position = cannon.transform.position;
                 bullet.SetActive(true);
 
-                _bullet.Init(_data.Bullet, cannon.transform.right);
+                _bullet.Init(_data.Bullet, _upgradeData.Bullet, cannon.transform.right);
             }
         }
     }
@@ -104,6 +102,37 @@ public class PlayerController : MonoSingleton<PlayerController>
         _data = TankManager.Instance.GetTankData(evolutionName);
 
         GenerateTank();
+    }
+
+    public void Upgrade(string upgradeName)
+    {
+        switch (upgradeName)
+        {
+            case "Health":
+                _upgradeData.Health += 1;
+                break;
+            case "HealthRegeneration":
+                _upgradeData.HealthRegeneration += 1;
+                break;
+            case "BodyDamage":
+                _upgradeData.BodyDamage += 1;
+                break;
+            case "Speed": // fait
+                _upgradeData.Speed += 1;
+                break;
+            case "FireRate": // fait
+                _upgradeData.FireRate += 0.1f;
+                break;
+            case "BulletDamage": // fait
+                _upgradeData.Bullet.Damage += 1;
+                break;
+            case "BulletPenetration": // fait
+                _upgradeData.Bullet.Penetration += 1;
+                break;
+            case "BulletSpeed": // fait
+                _upgradeData.Bullet.Speed += 1;
+                break;
+        }
     }
 }
 

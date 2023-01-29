@@ -8,19 +8,20 @@ public class Bullet : MonoBehaviour
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] SpriteRenderer _bulletFace, _bulletFade;
 
-    BulletData _data;
+    BulletData _data,_upgradeData;
     Coroutine _disableBullet;
     int _penetrationIndex;
 
     public BulletData Data { get => _data; }
 
-    public void Init(BulletData data, Vector3 direction)
+    public void Init(BulletData data,BulletData upgradeData, Vector3 direction)
     {
         _data = data;
-        
-        _penetrationIndex = _data.Penetration;
+        _upgradeData = upgradeData;
 
-        _rb.velocity = direction * _data.Speed;
+        _penetrationIndex = _data.Penetration + _upgradeData.Penetration;
+
+        _rb.velocity = direction * (_data.Speed + _upgradeData.Speed);
         _rb.simulated = true;
 
         transform.localScale = Vector3.one;
@@ -68,7 +69,7 @@ public class Bullet : MonoBehaviour
 
             tempEnemy.Rb.AddForce(_rb.velocity);
 
-            tempEnemy.TakeDamage(_data.Damage);
+            tempEnemy.TakeDamage(_data.Damage + _upgradeData.Damage);
 
             Collision();
         }
