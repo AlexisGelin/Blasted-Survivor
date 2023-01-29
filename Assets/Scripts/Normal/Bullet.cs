@@ -17,10 +17,11 @@ public class Bullet : MonoBehaviour
     public void Init(BulletData data, Vector3 direction)
     {
         _data = data;
-
+        
         _penetrationIndex = _data.Penetration;
 
         _rb.velocity = direction * _data.Speed;
+        _rb.simulated = true;
 
         transform.localScale = Vector3.one;
         _bulletFade.DOFade(1, 0);
@@ -37,8 +38,6 @@ public class Bullet : MonoBehaviour
 
     IEnumerator ScaleBulletAndDisable()
     {
-        _rb.velocity = Vector2.zero;
-
         transform.DOScale(new Vector3(2, 2, 2), .3f);
         _bulletFace.DOFade(0, .3f);
         _bulletFade.DOFade(0, .3f);

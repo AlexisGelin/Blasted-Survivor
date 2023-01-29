@@ -261,7 +261,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4679216629841387703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.19, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -322,6 +322,11 @@ MonoBehaviour:
   _health: 5
   _rb: {fileID: 4679216629841387707}
   _canonTransform: {fileID: 8151587304608773433}
+  _sprites:
+  - {fileID: 4679216629193964824}
+  - {fileID: 4679216630088308710}
+  - {fileID: 4679216630591029355}
+  - {fileID: 4679216629131800728}
 --- !u!1 &4679216630088308708
 GameObject:
   m_ObjectHideFlags: 0

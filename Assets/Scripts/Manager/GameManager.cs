@@ -21,6 +21,18 @@ public class GameManager : MonoSingleton<GameManager>
         PlayerController.Instance.Init();
 
         PoolManager.Instance.Init();
+
+        WaveManager.Instance.Init();
+
+        TankManager.Instance.Init();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            PlayerController.Instance.Evolve("DoubleShot");
+        }
     }
 
     public void QuitApplication()

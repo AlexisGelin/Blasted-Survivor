@@ -8,10 +8,11 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoSingleton<PlayerController>
 {
     [SerializeField] TankData _data;
-
     [SerializeField] Rigidbody2D _rb;
-    [SerializeField] Transform _canonTransform;
+    [SerializeField] Transform _renderer;
 
+
+    TankRenderer _tankRenderer;
     Bullet _bullet;
     PlayerInput _playerInput;
 
@@ -27,8 +28,24 @@ public class PlayerController : MonoSingleton<PlayerController>
         _playerInput = new PlayerInput();
         _playerInput.Enable();
 
-
+        GenerateTank();
     }
+
+    private void GenerateTank()
+    {
+        if (_tankRenderer != null)
+        {
+            foreach (Transform TankRenderer in _tankRenderer._canonTransforms)
+            {
+                DOTween.Kill(TankRenderer);
+            }
+            Destroy(_tankRenderer.gameObject);
+        }
+
+        var tempRenderer = Instantiate(_data.Renderer.Renderer, _renderer);
+        _tankRenderer = tempRenderer.GetComponent<TankRenderer>();
+    }
+
     private void Update()
     {
         //Rotate Player
@@ -63,18 +80,30 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             nextFire = Time.time + _data.FireRate;
 
-            _canonTransform.DOLocalMoveX(.25f, _data.FireRate / 2).OnComplete( () =>
+            foreach (var cannon in _tankRenderer._canonTransforms)
             {
-                _canonTransform.DOLocalMoveX(.3f, _data.FireRate / 2); ;
-            });
 
-            GameObject bullet = PoolManager.Instance.GetPooledObject(0);
-            _bullet = bullet.GetComponent<Bullet>();
-            bullet.transform.position = _canonTransform.transform.position;
-            bullet.SetActive(true);
+ /*               cannon.DOLocalMoveX(.25f, _data.FireRate / 2).OnComplete(() =>
+                {
+                    cannon.DOLocalMoveX(.3f, _data.FireRate / 2);
+                });*/
 
-            _bullet.Init(_data.Bullet,transform.right);
+                GameObject bullet = PoolManager.Instance.GetPooledObject(0);
+                _bullet = bullet.GetComponent<Bullet>();
+
+                bullet.transform.position = cannon.transform.position;
+                bullet.SetActive(true);
+
+                _bullet.Init(_data.Bullet, cannon.transform.right);
+            }
         }
+    }
+
+    public void Evolve(string evolutionName)
+    {
+        _data = TankManager.Instance.GetTankData(evolutionName);
+
+        GenerateTank();
     }
 }
 

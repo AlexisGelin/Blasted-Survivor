@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b6c247ce5431e140929953d3ed2516d, type: 3}
   m_Name: Starter
   m_EditorClassIdentifier: 
-  Health: 10
+  Name: Starter
+  Health: 2
   HealthRegeneration: 1
   BodyDamage: 1
   Speed: 2
@@ -21,3 +22,4 @@ MonoBehaviour:
     Damage: 1
     Penetration: 2
     Speed: 5
+  Renderer: {fileID: 3582898628122688570, guid: 9e51f74e88270a24e9277bfae4e34bec, type: 3}
