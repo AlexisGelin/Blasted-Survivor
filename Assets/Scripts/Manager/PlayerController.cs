@@ -53,6 +53,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void Update()
     {
+        if (GameManager.Instance.gameState != GameState.PLAY) return;
+
         //Rotate Player
         Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 playerPos = transform.position;
@@ -70,6 +72,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.gameState != GameState.PLAY) return;
+
         _rb.MovePosition(transform.position + moveDirection * (_data.Speed + _upgradeData.Speed) * Time.fixedDeltaTime);
     }
 

@@ -1,5 +1,6 @@
 
 using BaseTemplate.Behaviours;
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,26 +19,38 @@ public class GameManager : MonoSingleton<GameManager>
 
         AudioManager.Instance.Init();
 
-        PlayerController.Instance.Init();
-
         PoolManager.Instance.Init();
-
-        WaveManager.Instance.Init();
 
         TankManager.Instance.Init();
     }
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.R))
         {
-            PlayerController.Instance.Evolve("DoubleShot");
+            ReloadScene();
         }
+    }
+
+    public void StartGame()
+    {
+        gameState = GameState.PLAY;
+
+        PlayerController.Instance.Init();
+
+        WaveManager.Instance.Init();
     }
 
     public void QuitApplication()
     {
         Application.Quit();
+    }
+
+    public void ReloadScene()
+    {
+        DOTween.KillAll();
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
 }
