@@ -15,6 +15,21 @@ public class MenuView : View
 
     Panel _currentPanel;
 
+    public override void Init()
+    {
+        base.Init();
+    }
+
+    public override void OpenView()
+    {
+        base.OpenView();
+    }
+
+    public override void CloseView()
+    {
+        base.CloseView();
+    }
+
     public void SwitchPanel(Panel newPanel)
     {
         if (_currentPanel == null) _currentPanel = _menuPanel;

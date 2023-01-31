@@ -69,7 +69,10 @@ public class Bullet : MonoBehaviour
 
             tempEnemy.Rb.AddForce(_rb.velocity);
 
-            tempEnemy.TakeDamage(_data.Damage + _upgradeData.Damage);
+            if (tempEnemy.TakeDamage(_data.Damage + _upgradeData.Damage))
+            {
+                PlayerManager.Instance.IncreaseExp(tempEnemy.Data.ExpOnDestroy);
+            }
 
             Collision();
         }

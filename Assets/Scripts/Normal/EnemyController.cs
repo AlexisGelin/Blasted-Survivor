@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     List<Sequence> _damageColorTweeks = new List<Sequence>();
 
     public Rigidbody2D Rb { get => _rb; }
+    public TankData Data { get => _data; }
 
     public void Init()
     {
@@ -29,7 +30,7 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    public void TakeDamage(int amount)
+    public bool TakeDamage(int amount)
     {
         _health -= amount;
 
@@ -59,7 +60,10 @@ public class EnemyController : MonoBehaviour
         if (_health < 0)
         {
             StartCoroutine(ScaleBulletAndDisable());
+            return true;
         }
+
+        return false;
     }
 
     IEnumerator ScaleBulletAndDisable()

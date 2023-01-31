@@ -21,7 +21,15 @@ public class PlayerController : MonoSingleton<PlayerController>
     float nextFire = 0.0f;
     int _health, _maxHealth;
 
-    public TankData Data { get => _data; }
+    public int GetCurrentHealth { get { return _health; } }
+    public int GetCurrentMaxHealth { get { return _maxHealth; } }
+    public int GetCurrentBodyDamage { get { return _data.BodyDamage + _upgradeData.BodyDamage; } }
+    public int GetCurrentHealthRegeneration { get { return _data.HealthRegeneration + _upgradeData.HealthRegeneration; } }
+    public int GetCurrentSpeed { get { return _data.Speed + _upgradeData.Speed; } }
+    public int GetCurrentBulletSpeed { get { return _data.Bullet.Speed + _upgradeData.Bullet.Speed; } }
+    public int GetCurrentBulletDamage { get { return _data.Bullet.Damage + _upgradeData.Bullet.Damage; } }
+    public int GetCurrentBulletPenetration { get { return _data.Bullet.Penetration + _upgradeData.Bullet.Penetration; } }
+    public float GetCurrentFireRate { get { return _data.FireRate + _upgradeData.FireRate; } }
 
     public void Init()
     {
@@ -112,29 +120,29 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         switch (upgradeName)
         {
-            case "Health":
-                _upgradeData.Health += 1;
-                break;
             case "HealthRegeneration":
                 _upgradeData.HealthRegeneration += 1;
+                break;
+            case "Health":
+                _upgradeData.Health += 1;
                 break;
             case "BodyDamage":
                 _upgradeData.BodyDamage += 1;
                 break;
-            case "Speed": // fait
-                _upgradeData.Speed += 1;
-                break;
-            case "FireRate": // fait
-                _upgradeData.FireRate += 0.1f;
-                break;
-            case "BulletDamage": // fait
-                _upgradeData.Bullet.Damage += 1;
+            case "BulletSpeed": // fait
+                _upgradeData.Bullet.Speed += 1;
                 break;
             case "BulletPenetration": // fait
                 _upgradeData.Bullet.Penetration += 1;
                 break;
-            case "BulletSpeed": // fait
-                _upgradeData.Bullet.Speed += 1;
+            case "BulletDamage": // fait
+                _upgradeData.Bullet.Damage += 1;
+                break;
+            case "FireRate": // fait
+                _upgradeData.FireRate += 0.1f;
+                break;
+            case "Speed": // fait
+                _upgradeData.Speed += 1;
                 break;
         }
     }

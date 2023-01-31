@@ -10,9 +10,15 @@ public class UIManager : MonoSingleton<UIManager>
 
     View _currentView;
 
+    public MenuView MenuView { get => (MenuView)_menuView;  }
+    public GameView GameView { get => (GameView)_gameView; }
+
     public void Init()
     {
         SwitchView(_menuView);
+
+        _menuView.Init();
+        _gameView.Init();
     }
 
     public void SwitchView(View newView)
@@ -23,9 +29,14 @@ public class UIManager : MonoSingleton<UIManager>
 
             _currentView.CG.interactable = false;
             _currentView.CG.blocksRaycasts = false;
+
+            _currentView.CloseView();
+
         }
 
         _currentView = newView;
+
+        _currentView.OpenView();
 
         _currentView.CG.DOFade(1, .2f);
 

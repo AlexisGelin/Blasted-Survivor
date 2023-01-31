@@ -17,6 +17,7 @@ MonoBehaviour:
   HealthRegeneration: 1
   BodyDamage: 1
   Speed: 2
+  ExpOnDestroy: 1
   FireRate: 0.2
   Bullet:
     Damage: 1
