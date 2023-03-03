@@ -6,19 +6,21 @@ using UnityEngine;
 
 public class UIManager : MonoSingleton<UIManager>
 {
-    [SerializeField] View _menuView, _gameView;
+    [SerializeField] View _menuView, _gameView, _endGameView;
 
     View _currentView;
 
-    public MenuView MenuView { get => (MenuView)_menuView;  }
+    public MenuView MenuView { get => (MenuView)_menuView; }
     public GameView GameView { get => (GameView)_gameView; }
+    public EndGameView EndGameView { get => (EndGameView)_endGameView; }
 
     public void Init()
     {
-        SwitchView(_menuView);
+        GameManager.Instance.OnGameStateChanged += HandleStateChange;
 
-        _menuView.Init();
-        _gameView.Init();
+        MenuView.Init();
+        GameView.Init();
+        EndGameView.Init();
     }
 
     public void SwitchView(View newView)
@@ -40,7 +42,25 @@ public class UIManager : MonoSingleton<UIManager>
 
         _currentView.CG.DOFade(1, .2f);
 
-        _currentView.CG.interactable= true;
-        _currentView.CG.blocksRaycasts= true;
+        _currentView.CG.interactable = true;
+        _currentView.CG.blocksRaycasts = true;
+    }
+
+    void HandleStateChange(GameState newState)
+    {
+        switch (newState)
+        {
+            case GameState.MENU:
+                SwitchView(_menuView);
+                break;
+            case GameState.PLAY:
+                SwitchView(_gameView);
+                break;
+            case GameState.END:
+                SwitchView(_endGameView);
+                break;
+            default:
+                break;
+        }
     }
 }

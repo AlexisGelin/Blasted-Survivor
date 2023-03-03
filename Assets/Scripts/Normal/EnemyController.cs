@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IHealth
 {
     [SerializeField] TankData _data;
     [SerializeField] int _health;
@@ -59,14 +59,14 @@ public class EnemyController : MonoBehaviour
 
         if (_health < 0)
         {
-            StartCoroutine(ScaleBulletAndDisable());
+            StartCoroutine(ScaleTankAndDisable());
             return true;
         }
 
         return false;
     }
 
-    IEnumerator ScaleBulletAndDisable()
+    IEnumerator ScaleTankAndDisable()
     {
         transform.DOScale(new Vector3(2, 2, 2), .3f);
 
@@ -77,6 +77,11 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(.3f);
        
         gameObject.SetActive(false);
+    }
+
+    public bool TakeHeal(int amount)
+    {
+        throw new System.NotImplementedException();
     }
 
 }
