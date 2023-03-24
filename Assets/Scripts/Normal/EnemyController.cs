@@ -49,10 +49,10 @@ public class EnemyController : MonoBehaviour, IHealth
 
             _damageColorTweek = DOTween.Sequence();
 
-            _damageColorTweek.Join(sprite.DOColor(Color.white, .05f))
-                .Join(transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), .05f))
-                .Append(sprite.DOColor(tempColor, .05f))
-                .Join(transform.DOScale(Vector3.one, .05f));
+            _damageColorTweek.Join(sprite.DOColor(Color.white, .1f))
+                .Join(transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), .1f))
+                .Append(sprite.DOColor(tempColor, .1f))
+                .Join(transform.DOScale(Vector3.one, .1f));
 
             _damageColorTweeks.Add(_damageColorTweek);
         }
@@ -68,11 +68,11 @@ public class EnemyController : MonoBehaviour, IHealth
 
     IEnumerator ScaleTankAndDisable()
     {
-        transform.DOScale(new Vector3(2, 2, 2), .3f);
+        transform.DOScale(new Vector3(2, 2, 2), .5f);
 
         _rb.simulated = false;
 
-        foreach (var sprite in _sprites) sprite.DOFade(0, .3f);
+        foreach (var sprite in _sprites) sprite.DOFade(0, .5f);
 
         yield return new WaitForSeconds(.3f);
        

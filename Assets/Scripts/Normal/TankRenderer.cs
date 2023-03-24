@@ -6,4 +6,5 @@ public class TankRenderer : MonoBehaviour
 {
    public GameObject Renderer;
    public List<Transform> _canonTransforms;
+   public List<SpriteRenderer> Sprite;
 }

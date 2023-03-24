@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Starter
   m_EditorClassIdentifier: 
   Name: Starter
-  Health: 2
+  Health: 5
   HealthRegeneration: 1
   BodyDamage: 1
   Speed: 2

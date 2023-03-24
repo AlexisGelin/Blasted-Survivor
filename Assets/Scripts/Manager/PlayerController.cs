@@ -10,6 +10,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     [SerializeField] TankData _data, _upgradeData;
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] Transform _renderer;
+    [SerializeField] List<SpriteRenderer> _sprites;
 
     TankRenderer _tankRenderer;
     Bullet _bullet;
@@ -17,6 +18,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
     Sequence _damageColorTweek;
     List<Sequence> _damageColorTweeks = new List<Sequence>();
+
 
     Vector2 moveInput;
     Vector3 moveDirection;
@@ -61,8 +63,6 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
         var tempRenderer = Instantiate(_data.Renderer.Renderer, _renderer);
         _tankRenderer = tempRenderer.GetComponent<TankRenderer>();
-
-        Debug.Log(_data.Health);
 
         _maxHealth = _data.Health + _upgradeData.Health;
         _health = _data.Health + _upgradeData.Health;
@@ -173,37 +173,47 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
         if (_health < 0) _health = 0;
 
         UIManager.Instance.GameView.UpdateHealthBar();
-        /*  
-        if (_damageColorTweeks != null)
-        {
-            foreach (var tween in _damageColorTweeks)
-            {
-                tween.Complete();
-            }
-        }
 
+        PostProcessManager.Instance.DoVignetteFlash(1f, 1f);
 
-      foreach (var sprite in _sprites)
-        {
-            Color tempColor = sprite.color;
-
-            _damageColorTweek = DOTween.Sequence();
-
-            _damageColorTweek.Join(sprite.DOColor(Color.white, .05f))
-                .Join(transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), .05f))
-                .Append(sprite.DOColor(tempColor, .05f))
-                .Join(transform.DOScale(Vector3.one, .05f));
-
-            _damageColorTweeks.Add(_damageColorTweek);
-        }*/
 
         if (_health <= 0)
         {
             StartCoroutine(ScaleTankAndDisable());
 
+            CameraManager.Instance.ZoomHit(.5f, .2f, true);
+
             GameManager.Instance.UpdateGameState(GameState.END);
 
             return true;
+        }
+        else
+        {
+            CameraManager.Instance.ZoomHit(.5f, .2f);
+
+
+            if (_damageColorTweeks != null)
+            {
+                foreach (var tween in _damageColorTweeks)
+                {
+                    tween.Complete();
+                }
+            }
+
+
+            foreach (var sprite in _tankRenderer.Sprite)
+            {
+                Color tempColor = sprite.color;
+
+                _damageColorTweek = DOTween.Sequence();
+
+                _damageColorTweek.Join(sprite.DOColor(Color.white, .1f))
+                    .Join(transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), .1f))
+                    .Append(sprite.DOColor(tempColor, .1f))
+                    .Join(transform.DOScale(Vector3.one, .1f));
+
+                _damageColorTweeks.Add(_damageColorTweek);
+            }
         }
 
         return false;
@@ -212,7 +222,19 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
     IEnumerator ScaleTankAndDisable()
     {
-        transform.DOScale(new Vector3(2, 2, 2), .3f);
+
+        if (_damageColorTweeks != null)
+        {
+            foreach (var tween in _damageColorTweeks)
+            {
+                tween.Complete();
+            }
+        }
+
+        transform.DOScale(new Vector3(2, 2, 2), .5f);
+
+        foreach (var sprite in _tankRenderer.Sprite) sprite.DOFade(0, .5f);
+
 
         _rb.simulated = false;
 
