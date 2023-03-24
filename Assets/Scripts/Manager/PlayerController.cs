@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
+    public bool isInteract = false;
+
     [SerializeField] TankData _data, _upgradeData;
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] Transform _renderer;
@@ -37,6 +39,9 @@ public class PlayerController : MonoSingleton<PlayerController>
         _playerInput.Enable();
 
         _upgradeData.ResetData();
+
+        _playerInput.Player.Interact.started += (CallBackContext) => { isInteract = true; };
+        _playerInput.Player.Interact.canceled += (CallBackContext) => { isInteract = false; };
 
         GenerateTank();
     }
@@ -146,5 +151,7 @@ public class PlayerController : MonoSingleton<PlayerController>
                 break;
         }
     }
+
+
 }
 
