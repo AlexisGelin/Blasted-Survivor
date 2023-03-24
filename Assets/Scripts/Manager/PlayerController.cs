@@ -10,7 +10,6 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     [SerializeField] TankData _data, _upgradeData;
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] Transform _renderer;
-    [SerializeField] List<SpriteRenderer> _sprites;
 
     TankRenderer _tankRenderer;
     Bullet _bullet;
@@ -23,15 +22,20 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     Vector2 moveInput;
     Vector3 moveDirection;
 
-    float nextFire = 0.0f;
+    float _nextFire = 0.0f;
     int _health, _maxHealth;
+
+    Coroutine _playerRegenCoroutine;
+
+    int _healthRegenLevel, _healthLevel, _bodyDamageLevel, _bulletSpeedLevel, _bulletPenetrationLevel, _bulletDamageLevel, _bulletReloadLevel, _movementSpeedLevel;
+    const int MAX_LEVEL_UPGRADE = 7;
 
     #region Getter/Setter
 
     public int GetCurrentHealth { get { return _health; } }
     public int GetCurrentMaxHealth { get { return _maxHealth; } }
     public int GetCurrentBodyDamage { get { return _data.BodyDamage + _upgradeData.BodyDamage; } }
-    public int GetCurrentHealthRegeneration { get { return _data.HealthRegeneration + _upgradeData.HealthRegeneration; } }
+    public float GetCurrentHealthRegeneration { get { return _data.HealthRegeneration + _upgradeData.HealthRegeneration; } }
     public int GetCurrentSpeed { get { return _data.Speed + _upgradeData.Speed; } }
     public int GetCurrentBulletSpeed { get { return _data.Bullet.Speed + _upgradeData.Bullet.Speed; } }
     public int GetCurrentBulletDamage { get { return _data.Bullet.Damage + _upgradeData.Bullet.Damage; } }
@@ -77,7 +81,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
         if (_playerInput.Player.Fire.IsPressed()) Fire();
 
-        if (Input.GetKeyDown(KeyCode.G)) TakeDamage(1);
+        if (Input.GetKeyDown(KeyCode.G)) TakeDamage(10);
     }
 
     private void FixedUpdate()
@@ -87,7 +91,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
         _rb.MovePosition(transform.position + moveDirection * (_data.Speed + _upgradeData.Speed) * Time.fixedDeltaTime);
     }
 
-    #region Movement/Rotation
+    #region Movement/Rotation/Regen
     void PlayerMovement()
     {
         moveDirection = new Vector3(moveInput.x, moveInput.y, 0);
@@ -108,13 +112,39 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
     }
 
+    IEnumerator PlayerRegen()
+    {
+        yield return new WaitForSeconds(10);
+
+        while (_health < _maxHealth)
+        {
+            yield return new WaitForSeconds(.1f);
+            int onePercentHP = (int)(_maxHealth * 0.01f);
+            int healthToRegen = (int)(_maxHealth * (onePercentHP + _data.HealthRegeneration + _upgradeData.HealthRegeneration) / 100);
+            healthToRegen = (int)Mathf.Clamp(healthToRegen, 1, Mathf.Infinity);
+            _health += healthToRegen;
+
+            if (_health > _maxHealth) _health = _maxHealth;
+
+            UIManager.Instance.GameView.UpdateHealthBar();
+        }
+    }
+
     #endregion
 
     private void Fire()
     {
-        if (Time.time > nextFire)
+        if (Time.time > _nextFire)
         {
-            nextFire = Time.time + _data.FireRate - _upgradeData.FireRate;
+            _nextFire = Time.time + _data.FireRate - _upgradeData.FireRate;
+
+            if (_playerRegenCoroutine != null)
+            {
+                StopCoroutine(_playerRegenCoroutine);
+                _playerRegenCoroutine = null;
+            }
+
+            _playerRegenCoroutine = StartCoroutine(PlayerRegen());
 
             foreach (var cannon in _tankRenderer._canonTransforms)
             {
@@ -141,28 +171,76 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
         switch (upgradeName)
         {
             case "HealthRegeneration":
-                _upgradeData.HealthRegeneration += 1;
+                if (_healthRegenLevel >= MAX_LEVEL_UPGRADE) return;
+
+                _upgradeData.HealthRegeneration += .5f;
+
+                _healthRegenLevel++;
+
+                UIManager.Instance.GameView.UpgradePopup.UpdateHealthRegen(_healthRegenLevel);
                 break;
             case "Health":
+                if (_healthLevel >= MAX_LEVEL_UPGRADE) return;
+
                 _upgradeData.Health += 1;
+
+                _healthLevel++;
+
+                UIManager.Instance.GameView.UpgradePopup.UpdateMaxHealth(_healthLevel);
                 break;
             case "BodyDamage":
+                if (_bodyDamageLevel >= MAX_LEVEL_UPGRADE) return;
+
                 _upgradeData.BodyDamage += 1;
+
+                _bodyDamageLevel++;
+
+                UIManager.Instance.GameView.UpgradePopup.UpdateBodyDamage(_bodyDamageLevel);
                 break;
             case "BulletSpeed": // fait
+                if (_bulletSpeedLevel >= MAX_LEVEL_UPGRADE) return;
+
                 _upgradeData.Bullet.Speed += 1;
+
+                _bulletSpeedLevel++;
+
+                UIManager.Instance.GameView.UpgradePopup.UpdateBulletSpeed(_bulletSpeedLevel);
                 break;
             case "BulletPenetration": // fait
+                if (_bulletPenetrationLevel >= MAX_LEVEL_UPGRADE) return;
+
                 _upgradeData.Bullet.Penetration += 1;
+
+                _bulletPenetrationLevel++;
+
+                UIManager.Instance.GameView.UpgradePopup.UpdateBulletPenetration(_bulletPenetrationLevel);
                 break;
             case "BulletDamage": // fait
+                if (_bulletDamageLevel >= MAX_LEVEL_UPGRADE) return;
+
                 _upgradeData.Bullet.Damage += 1;
+
+                _bulletDamageLevel++;
+
+                UIManager.Instance.GameView.UpgradePopup.UpdateBulletDamage(_bulletDamageLevel);
                 break;
             case "FireRate": // fait
+                if (_bulletReloadLevel >= MAX_LEVEL_UPGRADE) return;
+
                 _upgradeData.FireRate += 0.1f;
+
+                _bulletReloadLevel++;
+
+                UIManager.Instance.GameView.UpgradePopup.UpdateBulletReload(_bulletReloadLevel);
                 break;
             case "Speed": // fait
+                if (_movementSpeedLevel >= MAX_LEVEL_UPGRADE) return;
+
                 _upgradeData.Speed += 1;
+
+                _movementSpeedLevel++;
+
+                UIManager.Instance.GameView.UpgradePopup.UpdateMovementSpeed(_movementSpeedLevel);
                 break;
         }
     }
@@ -176,6 +254,11 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
         PostProcessManager.Instance.DoVignetteFlash(1f, 1f);
 
+        if (_playerRegenCoroutine != null)
+        {
+            StopCoroutine(_playerRegenCoroutine);
+            _playerRegenCoroutine = null;
+        }
 
         if (_health <= 0)
         {
@@ -191,6 +274,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
         {
             CameraManager.Instance.ZoomHit(.5f, .2f);
 
+            _playerRegenCoroutine = StartCoroutine(PlayerRegen());
 
             if (_damageColorTweeks != null)
             {

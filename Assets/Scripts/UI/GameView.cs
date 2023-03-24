@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameView : View
 {
+    public UpgradePopup UpgradePopup;
     [SerializeField] TMP_Text _playerName, _coins, _waves, _timerBeforeWaves;
     [SerializeField] SliderBar _levelBar, _healthBar;
 
@@ -43,9 +44,6 @@ public class GameView : View
     public void InitHealthBar() => _healthBar.SetMaxBar(PlayerController.Instance.GetCurrentMaxHealth, PlayerController.Instance.GetCurrentHealth, true);
     public void UpdateCoins() => _coins.text = PlayerManager.Instance.Coin + " coins";
     public void UpdateWaves() => _waves.text = "Wave : " + 0; //Wave manager get current Wave
-
-
-
 
 
     #endregion
