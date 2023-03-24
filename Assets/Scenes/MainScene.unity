@@ -6182,7 +6182,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9431,7 +9431,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1562313224}
   m_Lens:
     FieldOfView: 34
-    OrthographicSize: 5
+    OrthographicSize: 4
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -20647,7 +20647,7 @@ MonoBehaviour:
   layerDetection:
     serializedVersion: 2
     m_Bits: 1024
-  doorPrice: 0
+  doorPrice: 120
   priceText: {fileID: 1934353272}
   wallCollider: {fileID: 245685343}
   glowDoorAnimator: {fileID: 716784676}

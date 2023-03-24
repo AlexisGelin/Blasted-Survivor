@@ -35,6 +35,12 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         UIManager.Instance.GameView.UpdateExpBar();
     }
 
+    public void UpdateCoins(int number)
+    {
+        _coin += number;
+        UIManager.Instance.GameView.UpdateCoins();
+    }
+
     void IncreaseLevel(int expLeft = 0)
     {
         _level++;

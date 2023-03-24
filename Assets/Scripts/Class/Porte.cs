@@ -15,22 +15,29 @@ public class Porte : MonoBehaviour
     [SerializeField] Animator allPropsAnimator;
 
 
+    private bool isPay = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        priceText.text = doorPrice.ToString();
-        glowDoorAnimator.SetTrigger("Start");
+        if (!isPay)
+        {
+            priceText.text = doorPrice.ToString();
+            glowDoorAnimator.SetTrigger("Start");
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        glowDoorAnimator.SetTrigger("Stop");
+        if (!isPay) glowDoorAnimator.SetTrigger("Stop");
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (PlayerController.Instance.isInteract)
+        if (PlayerController.Instance.isInteract && !isPay)
         {
-            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - doorPrice);
+            PlayerManager.Instance.UpdateCoins(-doorPrice);
+            glowDoorAnimator.SetTrigger("Stop");
+            isPay = true;
         }
     }
 }
