@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Starter
   m_EditorClassIdentifier: 
   Name: Starter
-  Health: 2
-  HealthRegeneration: 1
+  Health: 100
   BodyDamage: 1
   Speed: 2
   ExpOnDestroy: 5
   FireRate: 0.5
+  HealthRegeneration: 0
   Bullet:
     Damage: 1
     Penetration: 2

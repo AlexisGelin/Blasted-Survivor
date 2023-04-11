@@ -55,4 +55,29 @@ public class SliderBar : MonoBehaviour
 
         _text.text = value + separator + slider.maxValue;
     }
+
+    public void UpdateMaxBar(int value)
+    {
+        slider.maxValue = value;
+    }
+
+    public void UpdateMaxBar(int value, string prefix = "", string suffix = "")
+    {
+        float currentValue = slider.value;
+        slider.maxValue = value;
+
+        slider.DOValue(currentValue, TimeToSlide);
+
+        _text.text = prefix + currentValue + suffix;
+    }
+
+    public void UpdateMaxBar(int value, bool separated = false, string separator = " / ")
+    {
+        float currentValue = slider.value;
+        slider.maxValue = value;
+
+        slider.DOValue(currentValue, TimeToSlide);
+
+        _text.text = currentValue + separator + slider.maxValue;
+    }
 }

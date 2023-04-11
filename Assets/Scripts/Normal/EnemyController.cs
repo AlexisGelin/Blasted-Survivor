@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IHealth
 {
     [SerializeField] TankData _data;
     [SerializeField] int _health;
@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
 
     public Rigidbody2D Rb { get => _rb; }
     public TankData Data { get => _data; }
+    public int BodyDamage { get => _data.BodyDamage; }
 
     public void Init()
     {
@@ -49,34 +50,39 @@ public class EnemyController : MonoBehaviour
 
             _damageColorTweek = DOTween.Sequence();
 
-            _damageColorTweek.Join(sprite.DOColor(Color.white, .05f))
-                .Join(transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), .05f))
-                .Append(sprite.DOColor(tempColor, .05f))
-                .Join(transform.DOScale(Vector3.one, .05f));
+            _damageColorTweek.Join(sprite.DOColor(Color.white, .1f))
+                .Join(transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), .1f))
+                .Append(sprite.DOColor(tempColor, .1f))
+                .Join(transform.DOScale(Vector3.one, .1f));
 
             _damageColorTweeks.Add(_damageColorTweek);
         }
 
         if (_health < 0)
         {
-            StartCoroutine(ScaleBulletAndDisable());
+            StartCoroutine(ScaleTankAndDisable());
             return true;
         }
 
         return false;
     }
 
-    IEnumerator ScaleBulletAndDisable()
+    IEnumerator ScaleTankAndDisable()
     {
-        transform.DOScale(new Vector3(2, 2, 2), .3f);
+        transform.DOScale(new Vector3(2, 2, 2), .5f);
 
         _rb.simulated = false;
 
-        foreach (var sprite in _sprites) sprite.DOFade(0, .3f);
+        foreach (var sprite in _sprites) sprite.DOFade(0, .5f);
 
         yield return new WaitForSeconds(.3f);
        
         gameObject.SetActive(false);
+    }
+
+    public bool TakeHeal(int amount)
+    {
+        throw new System.NotImplementedException();
     }
 
 }
