@@ -54,9 +54,22 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
         _playerInput = new PlayerInput();
         _playerInput.Enable();
 
+        _playerInput.Player.Interact.started += PlayerStartInteract;
+
+        _playerInput.Player.Interact.canceled += PlayerStopInteract;
+
         _upgradeData.ResetData();
 
         GenerateTank();
+    }
+
+    private void PlayerStartInteract(InputAction.CallbackContext obj)
+    {
+        IsInteract = true;
+    }
+    private void PlayerStopInteract(InputAction.CallbackContext obj)
+    {
+        IsInteract = false;
     }
 
     private void GenerateTank()

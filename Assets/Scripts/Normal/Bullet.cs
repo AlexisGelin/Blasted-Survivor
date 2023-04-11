@@ -21,11 +21,10 @@ public class Bullet : MonoBehaviour
         _upgradeData = upgradeData;
 
         _penetrationIndex = _data.Penetration + _upgradeData.Penetration;
-        _rb.velocity = (Vector2)direction * (_data.Speed + _upgradeData.Speed) * ((PlayerController.Instance.PlayerVelocity.magnitude / 6)+ 1f);
-        Debug.Log(PlayerController.Instance.PlayerVelocity.magnitude);
+        _rb.velocity = direction * (_data.Speed + _upgradeData.Speed) + (PlayerController.Instance.PlayerVelocity / 10);
         _rb.simulated = true;
 
-        transform.localScale = Vector3.one;
+        transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
         _bulletFade.DOFade(1, 0);
         _bulletFace.DOFade(1, 0);
 

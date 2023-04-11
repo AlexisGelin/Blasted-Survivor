@@ -31,6 +31,8 @@ public class GameManager : MonoSingleton<GameManager>
 
         CameraManager.Instance.Init();
 
+        WorldManager.Instance.Init();
+
         UpdateGameState(GameState.MENU);
 
     }

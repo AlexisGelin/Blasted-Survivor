@@ -7,4 +7,5 @@ using UnityEngine;
 public class BulletData
 {
     public int Damage, Penetration, Speed;
+    public float BulletSize;
 }

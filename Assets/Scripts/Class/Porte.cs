@@ -6,8 +6,6 @@ using UnityEngine.Rendering.Universal;
 
 public class Porte : MonoBehaviour
 {
-    [SerializeField] LayerMask layerDetection;
-
     [SerializeField] int doorPrice;
     [SerializeField] TextMeshPro priceText;
     [SerializeField] BoxCollider2D wallCollider;
