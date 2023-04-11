@@ -15,6 +15,14 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     public int Exp { get => _exp; }
     public int Coin { get => _coin; }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            UpdateCoins(1000);
+        }
+    }
+
     int ExpForNextLevel()
     {
         return 20;

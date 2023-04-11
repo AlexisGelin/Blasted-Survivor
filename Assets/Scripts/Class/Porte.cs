@@ -12,8 +12,9 @@ public class Porte : MonoBehaviour
     [SerializeField] TextMeshPro priceText;
     [SerializeField] BoxCollider2D wallCollider;
     [SerializeField] Animator glowDoorAnimator;
-    [SerializeField] Animator allPropsAnimator;
-
+    [SerializeField] Animation ExplodeAnimationDoor;
+    [SerializeField] GameObject LockParent;
+    [SerializeField] ParticleSystem ExplosionDoorParticles;
 
     private bool isPay = false;
 
@@ -33,8 +34,11 @@ public class Porte : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (PlayerController.Instance.isInteract && !isPay)
+        if (PlayerController.Instance.isInteract && !isPay && PlayerManager.Instance.Coin >= doorPrice)
         {
+            ExplosionDoorParticles.Play();
+            ExplodeAnimationDoor.Play();
+            LockParent.SetActive(false);
             PlayerManager.Instance.UpdateCoins(-doorPrice);
             glowDoorAnimator.SetTrigger("Stop");
             isPay = true;
