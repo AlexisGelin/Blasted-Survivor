@@ -8,20 +8,21 @@ public class Bullet : MonoBehaviour
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] SpriteRenderer _bulletFace, _bulletFade;
 
-    BulletData _data,_upgradeData;
+    BulletData _data, _upgradeData;
     Coroutine _disableBullet;
     int _penetrationIndex;
 
     public BulletData Data { get => _data; }
+    public Rigidbody2D Rb { get => _rb; }
 
-    public void Init(BulletData data,BulletData upgradeData, Vector3 direction)
+    public void Init(BulletData data, BulletData upgradeData, Vector3 direction)
     {
         _data = data;
         _upgradeData = upgradeData;
 
         _penetrationIndex = _data.Penetration + _upgradeData.Penetration;
-
-        _rb.velocity = direction * (_data.Speed + _upgradeData.Speed);
+        _rb.velocity = (Vector2)direction * (_data.Speed + _upgradeData.Speed) * ((PlayerController.Instance.PlayerVelocity.magnitude / 6)+ 1f);
+        Debug.Log(PlayerController.Instance.PlayerVelocity.magnitude);
         _rb.simulated = true;
 
         transform.localScale = Vector3.one;

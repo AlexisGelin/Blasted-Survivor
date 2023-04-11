@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoSingleton<PlayerController>, IHealth
 {
     public bool IsInteract;
+    public Vector3 PlayerVelocity;
 
     [SerializeField] TankData _data, _upgradeData;
     [SerializeField] Rigidbody2D _rb;
@@ -92,7 +93,9 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     {
         if (GameManager.Instance.GameState != GameState.PLAY) return;
 
-        _rb.MovePosition(transform.position + moveDirection * (_data.Speed + _upgradeData.Speed) * Time.fixedDeltaTime);
+        PlayerVelocity = (moveDirection * (_data.Speed + _upgradeData.Speed));
+
+        _rb.MovePosition(transform.position + PlayerVelocity * Time.fixedDeltaTime);
     }
 
     #region Movement/Rotation/Regen
@@ -118,7 +121,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
     IEnumerator PlayerRegen()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(4);
 
         while (GetCurrentHealth < GetCurrentMaxHealth)
         {
