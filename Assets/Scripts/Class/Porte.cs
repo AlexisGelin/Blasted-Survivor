@@ -34,7 +34,7 @@ public class Porte : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (PlayerController.Instance.isInteract && !isPay && PlayerManager.Instance.Coin >= doorPrice)
+        if (PlayerController.Instance.IsInteract && !isPay && PlayerManager.Instance.Coin >= doorPrice)
         {
             ExplosionDoorParticles.Play();
             ExplodeAnimationDoor.Play();

@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoSingleton<PlayerController>, IHealth
 {
+    public bool IsInteract;
+
     [SerializeField] TankData _data, _upgradeData;
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] Transform _renderer;
