@@ -33,7 +33,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     #region Getter/Setter
 
     public int GetCurrentHealth { get { return _health; } }
-    public int GetCurrentMaxHealth { get { return _maxHealth; } }
+    public int GetCurrentMaxHealth { get { return _maxHealth + _upgradeData.Health; } }
     public int GetCurrentBodyDamage { get { return _data.BodyDamage + _upgradeData.BodyDamage; } }
     public float GetCurrentHealthRegeneration { get { return _data.HealthRegeneration + _upgradeData.HealthRegeneration; } }
     public int GetCurrentSpeed { get { return _data.Speed + _upgradeData.Speed; } }
@@ -116,15 +116,15 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     {
         yield return new WaitForSeconds(10);
 
-        while (_health < _maxHealth)
+        while (GetCurrentHealth < GetCurrentMaxHealth)
         {
             yield return new WaitForSeconds(.1f);
-            int onePercentHP = (int)(_maxHealth * 0.01f);
-            int healthToRegen = (int)(_maxHealth * (onePercentHP + _data.HealthRegeneration + _upgradeData.HealthRegeneration) / 100);
+            int onePercentHP = (int)(GetCurrentMaxHealth * 0.01f);
+            int healthToRegen = (int)(GetCurrentMaxHealth * (onePercentHP + GetCurrentHealthRegeneration) / 100);
             healthToRegen = (int)Mathf.Clamp(healthToRegen, 1, Mathf.Infinity);
             _health += healthToRegen;
 
-            if (_health > _maxHealth) _health = _maxHealth;
+            if (GetCurrentHealth > GetCurrentMaxHealth) _health = GetCurrentMaxHealth;
 
             UIManager.Instance.GameView.UpdateHealthBar();
         }
@@ -182,9 +182,11 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             case "Health":
                 if (_healthLevel >= MAX_LEVEL_UPGRADE) return;
 
-                _upgradeData.Health += 1;
+                _upgradeData.Health += 4;
 
                 _healthLevel++;
+
+                UIManager.Instance.GameView.UpdateHealthBarUpgrade();
 
                 UIManager.Instance.GameView.UpgradePopup.UpdateMaxHealth(_healthLevel);
                 break;
@@ -330,6 +332,15 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     public bool TakeHeal(int amount)
     {
         throw new System.NotImplementedException();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<IHealth>() != null)
+        {
+            var enemy = collision.gameObject.GetComponent<IHealth>();
+            enemy.TakeDamage(GetCurrentBodyDamage);
+        }
     }
 }
 

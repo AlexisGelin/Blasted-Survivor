@@ -19105,6 +19105,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2083707653125490491, guid: 5b0e9618ebed7334fa00f6439a40aa94, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083707653125490491, guid: 5b0e9618ebed7334fa00f6439a40aa94, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083707653125490491, guid: 5b0e9618ebed7334fa00f6439a40aa94, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8875414204139858008}
+    - target: {fileID: 2083707653125490491, guid: 5b0e9618ebed7334fa00f6439a40aa94, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083707653125490491, guid: 5b0e9618ebed7334fa00f6439a40aa94, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateMaxBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083707653125490491, guid: 5b0e9618ebed7334fa00f6439a40aa94, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SliderBar, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083707653125490491, guid: 5b0e9618ebed7334fa00f6439a40aa94, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8298069749876780115, guid: 5b0e9618ebed7334fa00f6439a40aa94, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

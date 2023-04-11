@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour, IHealth
 
     public Rigidbody2D Rb { get => _rb; }
     public TankData Data { get => _data; }
+    public int BodyDamage { get => _data.BodyDamage; }
 
     public void Init()
     {
