@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: QuadraShot
   Health: 2
-  HealthRegeneration: 1
-  BodyDamage: 1
+  BodyDamage: 75
   Speed: 2
   ExpOnDestroy: 1
   FireRate: 0.1
+  HealthRegeneration: 1
   Bullet:
-    Damage: 1
+    Damage: 25
     Penetration: 2
     Speed: 5
   Renderer: {fileID: 3582898628122688570, guid: 524f0441014484b41b04a9630ae47c8d, type: 3}

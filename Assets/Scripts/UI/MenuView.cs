@@ -61,4 +61,6 @@ public class MenuView : View
         else _state = MenuState.centered;
     }
 
+    public void HandleStartButton() => GameManager.Instance.StartGame();
+
 }

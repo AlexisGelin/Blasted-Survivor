@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IHealth
 {
     public bool TakeDamage(int amount);
-    public bool TakeHeal(int amount);
+    public void TakeHeal(int amount);
 }

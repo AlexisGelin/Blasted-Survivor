@@ -40,11 +40,19 @@ public class GameView : View
 
     public void UpdateExpBar() => _levelBar.SetBar(PlayerManager.Instance.Exp);
     public void UpdateHealthBar() => _healthBar.SetBar(PlayerController.Instance.GetCurrentHealth, true);
-    public void UpdateHealthBarUpgrade() => _healthBar.UpdateMaxBar(PlayerController.Instance.GetCurrentMaxHealth, true);
     public void InitExpBar() => _levelBar.SetMaxBarWithText(PlayerManager.Instance.GetCurrentExpForNextLevel, PlayerManager.Instance.Exp, "Level : " + PlayerManager.Instance.Level);
     public void InitHealthBar() => _healthBar.SetMaxBar(PlayerController.Instance.GetCurrentMaxHealth, PlayerController.Instance.GetCurrentHealth, true);
     public void UpdateCoins() => _coins.text = PlayerManager.Instance.Coin + " coins";
     public void UpdateWaves() => _waves.text = "Wave : " + 0; //Wave manager get current Wave
+
+    public void HandleUpgradeHealthRegen() => PlayerController.Instance.Upgrade("HealthRegeneration");
+    public void HandleUpgradeHealth() => PlayerController.Instance.Upgrade("Health");
+    public void HandleUpgradeBodyDamage() => PlayerController.Instance.Upgrade("BodyDamage");
+    public void HandleUpgradeBulletSpeed() => PlayerController.Instance.Upgrade("BulletSpeed");
+    public void HandleUpgradeBulletPenetration() => PlayerController.Instance.Upgrade("BulletPenetration");
+    public void HandleUpgradeBulletDamage() => PlayerController.Instance.Upgrade("BulletDamage");
+    public void HandleUpgradeBulletReload() => PlayerController.Instance.Upgrade("FireRate");
+    public void HandleUpgradeMovementSpeed() => PlayerController.Instance.Upgrade("Speed");
 
     #endregion
 }

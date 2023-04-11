@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: DoubleShot
   Health: 2
-  HealthRegeneration: 1
-  BodyDamage: 1
+  BodyDamage: 60
   Speed: 2
   ExpOnDestroy: 1
   FireRate: 0.2
+  HealthRegeneration: 1
   Bullet:
-    Damage: 1
+    Damage: 25
     Penetration: 2
     Speed: 5
   Renderer: {fileID: 5386375848742198481, guid: ab468775606e7784f9f8373058624e78, type: 3}

@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour, IHealth
 
     public Rigidbody2D Rb { get => _rb; }
     public TankData Data { get => _data; }
-    public int BodyDamage { get => _data.BodyDamage; }
+    public int GetBodyDamage { get => _data.BodyDamage; }
 
     public void Init()
     {
@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour, IHealth
             _damageColorTweeks.Add(_damageColorTweek);
         }
 
-        if (_health < 0)
+        if (_health <= 0)
         {
             StartCoroutine(ScaleTankAndDisable());
             return true;
@@ -80,7 +80,7 @@ public class EnemyController : MonoBehaviour, IHealth
         gameObject.SetActive(false);
     }
 
-    public bool TakeHeal(int amount)
+    public void TakeHeal(int amount)
     {
         throw new System.NotImplementedException();
     }

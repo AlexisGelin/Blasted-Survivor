@@ -124,11 +124,8 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             int onePercentHP = (int)(GetCurrentMaxHealth * 0.01f);
             int healthToRegen = (int)(GetCurrentMaxHealth * (onePercentHP + GetCurrentHealthRegeneration) / 100);
             healthToRegen = (int)Mathf.Clamp(healthToRegen, 1, Mathf.Infinity);
-            _health += healthToRegen;
 
-            if (GetCurrentHealth > GetCurrentMaxHealth) _health = GetCurrentMaxHealth;
-
-            UIManager.Instance.GameView.UpdateHealthBar();
+            TakeHeal(healthToRegen);
         }
     }
 
@@ -172,7 +169,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     {
         switch (upgradeName)
         {
-            case "HealthRegeneration":
+            case "HealthRegeneration": // Fait
                 if (_healthRegenLevel >= MAX_LEVEL_UPGRADE) return;
 
                 _upgradeData.HealthRegeneration += .5f;
@@ -181,21 +178,22 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
                 UIManager.Instance.GameView.UpgradePopup.UpdateHealthRegen(_healthRegenLevel);
                 break;
-            case "Health":
+            case "Health": // Fait
                 if (_healthLevel >= MAX_LEVEL_UPGRADE) return;
 
-                _upgradeData.Health += 4;
+                _upgradeData.Health += 20;
+                _health += 20;
 
                 _healthLevel++;
 
-                UIManager.Instance.GameView.UpdateHealthBarUpgrade();
+                UIManager.Instance.GameView.InitHealthBar();
 
                 UIManager.Instance.GameView.UpgradePopup.UpdateMaxHealth(_healthLevel);
                 break;
-            case "BodyDamage":
+            case "BodyDamage": // Fait
                 if (_bodyDamageLevel >= MAX_LEVEL_UPGRADE) return;
 
-                _upgradeData.BodyDamage += 1;
+                _upgradeData.BodyDamage += 10;
 
                 _bodyDamageLevel++;
 
@@ -331,9 +329,13 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
         gameObject.SetActive(false);
     }
 
-    public bool TakeHeal(int amount)
+    public void TakeHeal(int amount)
     {
-        throw new System.NotImplementedException();
+        _health += amount;
+
+        if (GetCurrentHealth > GetCurrentMaxHealth) _health = GetCurrentMaxHealth;
+
+        UIManager.Instance.GameView.InitHealthBar();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -342,6 +344,13 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
         {
             var enemy = collision.gameObject.GetComponent<IHealth>();
             enemy.TakeDamage(GetCurrentBodyDamage);
+
+        }
+
+        if (collision.gameObject.GetComponent<EnemyController>() != null)
+        {
+            var enemy = collision.gameObject.GetComponent<EnemyController>();
+            TakeDamage(enemy.GetBodyDamage);
         }
     }
 }
