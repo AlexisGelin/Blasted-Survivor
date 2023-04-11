@@ -29,7 +29,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
     Coroutine _playerRegenCoroutine;
 
-    int _healthRegenLevel, _healthLevel, _bodyDamageLevel, _bulletSpeedLevel, _bulletPenetrationLevel, _bulletDamageLevel, _bulletReloadLevel, _movementSpeedLevel;
+    int _healthRegenLevel, _healthLevel, _bodyDamageLevel, _bulletSpeedLevel, _bulletPenetrationLevel, _bulletDamageLevel, _bulletReloadLevel, _movementSpeedLevel,_upgradePoint;
     const int MAX_LEVEL_UPGRADE = 7;
 
     #region Getter/Setter
@@ -43,6 +43,8 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     public int GetCurrentBulletDamage { get { return _data.Bullet.Damage + _upgradeData.Bullet.Damage; } }
     public int GetCurrentBulletPenetration { get { return _data.Bullet.Penetration + _upgradeData.Bullet.Penetration; } }
     public float GetCurrentFireRate { get { return _data.FireRate + _upgradeData.FireRate; } }
+
+    public int UpgradePoint { get => _upgradePoint; set => _upgradePoint = value; }
 
     #endregion
 
