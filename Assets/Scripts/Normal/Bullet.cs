@@ -8,13 +8,14 @@ public class Bullet : MonoBehaviour
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] SpriteRenderer _bulletFace, _bulletFade;
     [SerializeField] TrailRenderer _trailRenderer;
-    [SerializeField] ParticleSystem _onHitFX;
+    [SerializeField] GameObject _onHitFX, _circleFX;
 
     BulletData _data, _upgradeData;
     Coroutine _disableBullet;
     int _penetrationIndex;
 
     Tweener _trailRendererBoing;
+    Vector3 _direction;
 
 
     public BulletData Data { get => _data; }
@@ -25,8 +26,10 @@ public class Bullet : MonoBehaviour
         _data = data;
         _upgradeData = upgradeData;
 
+        _direction = direction;
+
         _penetrationIndex = _data.Penetration + _upgradeData.Penetration;
-        _rb.velocity = direction * (_data.Speed + _upgradeData.Speed) + (PlayerController.Instance.PlayerVelocity / 10);
+        _rb.velocity = _direction * (_data.Speed + _upgradeData.Speed) + (PlayerController.Instance.PlayerVelocity / 10);
         _rb.simulated = true;
 
         transform.localScale = new Vector3(data.BulletSize, data.BulletSize, data.BulletSize);
@@ -75,6 +78,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        var circleFX = Instantiate(_circleFX, transform.position, Quaternion.identity);
+        var circle = circleFX.GetComponent<SpriteRenderer>();
+
+
+
         if (collision.gameObject.layer == 20)
         {
             EnemyController tempEnemy = collision.gameObject.GetComponent<EnemyController>();
@@ -86,16 +94,35 @@ public class Bullet : MonoBehaviour
                 PlayerManager.Instance.IncreaseExp(tempEnemy.Data.ExpOnDestroy);
             }
 
-            _onHitFX.transform.LookAt(_rb.velocity);
-            _onHitFX.transform.Rotate(new Vector3(-90, 0, 0));
-            _onHitFX.Play();
+            DOTween.Sequence()
+                .Join(circle.transform.DOPunchScale(new Vector3(.2f, .2f, .2f), .1f))
+                .Append(circle.DOFade(0, .2f));
+
+            Destroy(circleFX, .4f);
+
+            var hitFX = Instantiate(_onHitFX, transform);
+            hitFX.transform.LookAt(transform.position - _direction);
+            Destroy(hitFX, hitFX.GetComponent<ParticleSystem>().main.duration);
+
+            CameraManager.Instance.ShakeCamera(1);
+            TimeManager.Instance.DoLagTime();
 
             Collision();
         }
 
-        /*        if (collision.gameObject.layer == 20)
-                {
-                    StartCoroutine(ScaleBulletAndDisable());
-                }*/
+        if (collision.gameObject.layer == 30)
+        {
+            DOTween.Sequence()
+                .Join(circle.transform.DOPunchScale(new Vector3(.1f, .1f, .1f), .1f))
+                .Append(circle.DOFade(0, .1f));
+
+            Destroy(circleFX, .4f);
+
+            var hitFX = Instantiate(_onHitFX, transform);
+            hitFX.transform.LookAt(transform.position - _direction);
+            Destroy(hitFX, hitFX.GetComponent<ParticleSystem>().main.duration);
+
+            StartCoroutine(ScaleBulletAndDisable());
+        }
     }
 }

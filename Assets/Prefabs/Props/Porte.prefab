@@ -1185,9 +1185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4e2281c539bf8469f4b71e23145b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerDetection:
-    serializedVersion: 2
-    m_Bits: 1024
   doorPrice: 120
   priceText: {fileID: 2838806853779169079}
   wallCollider: {fileID: 2838806851818922000}
@@ -1865,6 +1862,10 @@ PrefabInstance:
     - target: {fileID: 199398115559063984, guid: ec1383a81f8b26e41bd5795fba065567, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199600948077274898, guid: ec1383a81f8b26e41bd5795fba065567, type: 3}
+      propertyPath: m_SortingOrder
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 199600948077274898, guid: ec1383a81f8b26e41bd5795fba065567, type: 3}
       propertyPath: m_Materials.Array.size
