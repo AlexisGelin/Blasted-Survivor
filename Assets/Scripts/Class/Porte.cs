@@ -15,8 +15,35 @@ public class Porte : MonoBehaviour
     [SerializeField] Animation ExplodeAnimationDoor;
     [SerializeField] GameObject LockParent;
     [SerializeField] ParticleSystem ExplosionDoorParticles;
+    [SerializeField] List<Transform> floatingTextTransform;
 
     private bool isPay = false;
+
+    private void Start()
+    {
+        float rotationToSet = 0;
+        switch (transform.rotation.eulerAngles.z)
+        {
+            case 0: 
+                rotationToSet = 0; 
+                break;
+            case 90f: 
+                rotationToSet = -90;
+                break;
+            case 270:
+                rotationToSet = 90;
+                break;
+        }
+
+        foreach (Transform t in floatingTextTransform)
+        {
+            t.transform.eulerAngles = new Vector3(
+                t.transform.eulerAngles.x,
+                t.transform.eulerAngles.y,
+                t.transform.eulerAngles.z + rotationToSet
+            );
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,6 +63,7 @@ public class Porte : MonoBehaviour
     {
         if (PlayerController.Instance.IsInteract && !isPay && PlayerManager.Instance.Coin >= doorPrice)
         {
+            wallCollider.gameObject.SetActive(false);
             ExplosionDoorParticles.Play();
             ExplodeAnimationDoor.Play();
             LockParent.SetActive(false);
