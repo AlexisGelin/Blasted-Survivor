@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Starter
   Health: 100
   BodyDamage: 1
-  Speed: 2
+  Speed: 5
   ExpOnDestroy: 5
   FireRate: 0.5
   HealthRegeneration: 0
