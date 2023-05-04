@@ -30,8 +30,11 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
     Coroutine _playerRegenCoroutine;
 
-    int _healthRegenLevel, _healthLevel, _bodyDamageLevel, _bulletSpeedLevel, _bulletPenetrationLevel, _bulletDamageLevel, _bulletReloadLevel, _movementSpeedLevel,_upgradePoint;
+    int _healthRegenLevel, _healthLevel, _bodyDamageLevel, _bulletSpeedLevel, _bulletPenetrationLevel, _bulletDamageLevel, _bulletReloadLevel, _movementSpeedLevel, _upgradePoint;
     const int MAX_LEVEL_UPGRADE = 7;
+
+    List<Sequence> _canonSequences = new List<Sequence>();
+    List<Vector2> _canonTransforms = new List<Vector2>();
 
     #region Getter/Setter
 
@@ -85,6 +88,13 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
         var tempRenderer = Instantiate(_data.Renderer.Renderer, _renderer);
         _tankRenderer = tempRenderer.GetComponent<TankRenderer>();
+
+        _canonTransforms.Clear();
+
+        foreach (var canon in _tankRenderer._canonTransforms)
+        {
+            _canonTransforms.Add(canon.localPosition);
+        }
 
         _maxHealth = _data.Health + _upgradeData.Health;
         _health = _data.Health + _upgradeData.Health;
@@ -163,15 +173,34 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
             _playerRegenCoroutine = StartCoroutine(PlayerRegen());
 
-            foreach (var cannon in _tankRenderer._canonTransforms)
+            foreach (Sequence seq in _canonSequences)
             {
+                seq.Kill();
+            }
+
+            _canonSequences.Clear();
+
+            for (int i = 0; i < _tankRenderer._canonTransforms.Count; i++)
+            {
+                var currentCannon = _tankRenderer._canonTransforms[i];
                 GameObject bullet = PoolManager.Instance.GetPooledObject(0);
                 _bullet = bullet.GetComponent<Bullet>();
 
-                bullet.transform.position = cannon.transform.position;
+                bullet.transform.position = currentCannon.transform.position;
                 bullet.SetActive(true);
 
-                _bullet.Init(_data.Bullet, _upgradeData.Bullet, cannon.transform.right);
+                _bullet.Init(_data.Bullet, _upgradeData.Bullet, currentCannon.transform.right);
+
+                currentCannon.transform.localPosition = new Vector3(_canonTransforms[i].x, _canonTransforms[i].y);
+
+                _tankRenderer.ShootFX[i].Play();
+
+                var newSeq = DOTween.Sequence()
+                   .Join(currentCannon.transform.DOLocalMoveX(currentCannon.transform.localPosition.x - .05f, .05f).SetEase(Ease.OutSine))
+                   .Append(currentCannon.transform.DOLocalMoveX(currentCannon.transform.localPosition.x + .05f, .1f).SetEase(Ease.OutSine))
+                   .Append(currentCannon.transform.DOLocalMoveX(currentCannon.transform.localPosition.x, .5f).SetEase(Ease.OutSine));
+
+                _canonSequences.Add(newSeq);
             }
         }
     }

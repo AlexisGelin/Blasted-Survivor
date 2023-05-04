@@ -7,10 +7,15 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] SpriteRenderer _bulletFace, _bulletFade;
+    [SerializeField] TrailRenderer _trailRenderer;
+    [SerializeField] ParticleSystem _onHitFX;
 
     BulletData _data, _upgradeData;
     Coroutine _disableBullet;
     int _penetrationIndex;
+
+    Tweener _trailRendererBoing;
+
 
     public BulletData Data { get => _data; }
     public Rigidbody2D Rb { get => _rb; }
@@ -24,7 +29,14 @@ public class Bullet : MonoBehaviour
         _rb.velocity = direction * (_data.Speed + _upgradeData.Speed) + (PlayerController.Instance.PlayerVelocity / 10);
         _rb.simulated = true;
 
-        transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
+        transform.localScale = new Vector3(data.BulletSize, data.BulletSize, data.BulletSize);
+
+        _trailRenderer.Clear();
+        _trailRendererBoing.Kill();
+
+        _trailRendererBoing = DOVirtual.Float(1, .4f, .1f, x => _trailRenderer.widthMultiplier = x).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+
+
         _bulletFade.DOFade(1, 0);
         _bulletFace.DOFade(1, 0);
 
@@ -74,7 +86,16 @@ public class Bullet : MonoBehaviour
                 PlayerManager.Instance.IncreaseExp(tempEnemy.Data.ExpOnDestroy);
             }
 
+            _onHitFX.transform.LookAt(_rb.velocity);
+            _onHitFX.transform.Rotate(new Vector3(-90, 0, 0));
+            _onHitFX.Play();
+
             Collision();
         }
+
+        /*        if (collision.gameObject.layer == 20)
+                {
+                    StartCoroutine(ScaleBulletAndDisable());
+                }*/
     }
 }
