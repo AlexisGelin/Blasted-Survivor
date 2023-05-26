@@ -26,6 +26,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         numberOfEnemyRemaining--;
         if (numberOfEnemyRemaining <= 0)
         {
+            UIManager.Instance.GameView.AddPoint(1);
             StartCoroutine(StartNewWave());
         }
     }

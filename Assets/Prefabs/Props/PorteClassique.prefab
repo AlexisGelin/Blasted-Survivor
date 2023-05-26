@@ -7,6 +7,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 35674475063196133, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603975571425982441, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2838806853547076496, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
+      propertyPath: m_Size.y
+      value: 2.157703
+      objectReference: {fileID: 0}
+    - target: {fileID: 2838806853547076496, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.09614846
+      objectReference: {fileID: 0}
     - target: {fileID: 2838806853547076497, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -54,6 +70,18 @@ PrefabInstance:
     - target: {fileID: 2838806853547076498, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
       propertyPath: m_Name
       value: PorteClassique
+      objectReference: {fileID: 0}
+    - target: {fileID: 4561886227950823413, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421103993457118240, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911047014707385966, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}

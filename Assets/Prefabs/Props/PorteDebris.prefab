@@ -1299,6 +1299,14 @@ PrefabInstance:
       propertyPath: m_Animations.Array.data[1]
       value: 
       objectReference: {fileID: 7400000, guid: bd43918fccf80fb478a974a12abc301a, type: 2}
+    - target: {fileID: 2838806853547076496, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
+      propertyPath: m_Size.y
+      value: 2.1274793
+      objectReference: {fileID: 0}
+    - target: {fileID: 2838806853547076496, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.111260295
+      objectReference: {fileID: 0}
     - target: {fileID: 2838806853547076497, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
       propertyPath: m_RootOrder
       value: 0

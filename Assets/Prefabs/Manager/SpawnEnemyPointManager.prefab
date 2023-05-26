@@ -49,4 +49,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   offsetDistanceToSpawnEnemy: 5
-  numberOfCurrentSpawnPointActive: 5
+  numberOfCurrentSpawnPointActive: 7
