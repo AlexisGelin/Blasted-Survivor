@@ -22,6 +22,7 @@ public class GameManager : MonoSingleton<GameManager>
         AudioManager.Instance.Init();
 
         PoolManager.Instance.Init();
+        EnemyPoolManager.Instance.Init();
 
         TankManager.Instance.Init();
 
@@ -32,6 +33,8 @@ public class GameManager : MonoSingleton<GameManager>
         CameraManager.Instance.Init();
 
         WorldManager.Instance.Init();
+
+        SpawnPointEnemyManager.Instance.Init();
 
         UpdateGameState(GameState.MENU);
 

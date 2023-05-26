@@ -5,20 +5,75 @@ using UnityEngine;
 
 public class WaveManager : MonoSingleton<WaveManager>
 {
+    [SerializeField] float delayToInitFirstWave;
+    [SerializeField] float delayBetweenWave;
+    [SerializeField] float timerForEachSpawnEnemy;
+    [SerializeField] List<Wave> waves;
+
+    public int numberOfEnemyRemaining;
+    private int numberOfEnemyRemainingBase;
+
+    private int currentIndexOfWaves;
+    EnemyController enemyControllerToSpawn;
+
     public void Init()
     {
-        StartCoroutine(StartGeneration());
+        StartCoroutine(StartFirstWave());
     }
 
-    IEnumerator StartGeneration()
+    public void EnnemyDie()
     {
-        while (true)
+        numberOfEnemyRemaining--;
+        if (numberOfEnemyRemaining <= 0)
         {
-            GameObject enemyGO = PoolManager.Instance.GetPooledObject(1);
-            EnemyController enemyController = enemyGO.GetComponent<EnemyController>();
-            enemyController.Init();
-            enemyGO.SetActive(true);
-            yield return new WaitForSeconds(1f);
+            UIManager.Instance.GameView.AddPoint(1);
+            StartCoroutine(StartNewWave());
         }
     }
+    
+
+    IEnumerator StartFirstWave()
+    {
+        currentIndexOfWaves = 0;
+
+        numberOfEnemyRemainingBase += waves[currentIndexOfWaves].enemyToAdd;
+        numberOfEnemyRemaining = numberOfEnemyRemainingBase;
+        yield return new WaitForSeconds(delayToInitFirstWave);
+        StartCoroutine(SpawnEnemys());
+
+    }
+
+    IEnumerator StartNewWave()
+    {
+        currentIndexOfWaves++;
+        if (currentIndexOfWaves >= waves.Count)
+        {
+            currentIndexOfWaves = 0;
+        }
+        yield return new WaitForSeconds(delayBetweenWave);
+        numberOfEnemyRemainingBase += waves[currentIndexOfWaves].enemyToAdd;
+        numberOfEnemyRemaining = numberOfEnemyRemainingBase;
+        StartCoroutine(SpawnEnemys());
+    }
+
+    IEnumerator SpawnEnemys()
+    {
+        for (int i = 0; i < numberOfEnemyRemaining; i++)
+        {
+            enemyControllerToSpawn = EnemyPoolManager.Instance.GetPooledEnemy(0);
+            enemyControllerToSpawn.Init();
+            enemyControllerToSpawn.gameObject.SetActive(true);
+            enemyControllerToSpawn.transform.position = SpawnPointEnemyManager.Instance.searchBestSpawnPoint().position;
+            yield return new WaitForSeconds(timerForEachSpawnEnemy);
+        }
+    }
+
+    
+}
+
+[System.Serializable] 
+public class Wave
+{
+    public int enemyToAdd;
+    public int enemyHealthToAdd;
 }

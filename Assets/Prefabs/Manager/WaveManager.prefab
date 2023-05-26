@@ -44,3 +44,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd01872279195b146871fbaeb45290a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayToInitFirstWave: 2
+  delayBetweenWave: 2
+  timerForEachSpawnEnemy: 0.3
+  waves:
+  - enemyToAdd: 3
+    enemyHealthToAdd: 0
+  - enemyToAdd: 5
+    enemyHealthToAdd: 10
+  - enemyToAdd: 4
+    enemyHealthToAdd: 10
+  - enemyToAdd: 3
+    enemyHealthToAdd: 10
+  - enemyToAdd: 6
+    enemyHealthToAdd: 10
+  - enemyToAdd: 4
+    enemyHealthToAdd: 10
+  - enemyToAdd: 4
+    enemyHealthToAdd: 10
+  - enemyToAdd: 4
+    enemyHealthToAdd: 10
+  - enemyToAdd: 6
+    enemyHealthToAdd: 10
+  - enemyToAdd: 8
+    enemyHealthToAdd: 10
+  - enemyToAdd: 3
+    enemyHealthToAdd: 10
+  - enemyToAdd: 2
+    enemyHealthToAdd: 10
+  - enemyToAdd: 6
+    enemyHealthToAdd: 10
+  - enemyToAdd: 7
+    enemyHealthToAdd: 10
+  numberOfEnemyRemaining: 0

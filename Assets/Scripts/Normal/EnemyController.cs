@@ -60,6 +60,7 @@ public class EnemyController : MonoBehaviour, IHealth
 
         if (_health <= 0)
         {
+            WaveManager.Instance.EnnemyDie();
             StartCoroutine(ScaleTankAndDisable());
             return true;
         }
