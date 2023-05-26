@@ -19,18 +19,20 @@ public class ObjectPoolItem
     }
 }
 
+
+
 public class PoolManager : MonoSingleton<PoolManager>
 {
     public List<ObjectPoolItem> itemsToPool;
-
-
     public List<List<GameObject>> pooledObjectsList;
+
     public List<GameObject> pooledObjects;
     private List<int> positions;
 
     public void Init()
     {
         pooledObjectsList = new List<List<GameObject>>();
+
         pooledObjects = new List<GameObject>();
         positions = new List<int>();
 
@@ -39,7 +41,6 @@ public class PoolManager : MonoSingleton<PoolManager>
         {
             ObjectPoolItemToPooledObject(i);
         }
-
     }
 
 

@@ -22,6 +22,7 @@ public class GameManager : MonoSingleton<GameManager>
         AudioManager.Instance.Init();
 
         PoolManager.Instance.Init();
+        EnemyPoolManager.Instance.Init();
 
         TankManager.Instance.Init();
 

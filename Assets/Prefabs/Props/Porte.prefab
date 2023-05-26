@@ -1185,9 +1185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4e2281c539bf8469f4b71e23145b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerDetection:
-    serializedVersion: 2
-    m_Bits: 1024
   doorPrice: 120
   priceText: {fileID: 2838806853779169079}
   wallCollider: {fileID: 2838806851818922000}
@@ -1787,7 +1784,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1850175233, guid: c90069f5dcc519f4384a1eb493cfdedd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
