@@ -8,4 +8,9 @@ public class Panel : MonoBehaviour
     public Vector2 _anchorMin, _anchorMax;
     public Vector2 _mainAnchorMin, _mainAnchorMax;
     public CanvasGroup CG;
+
+    public virtual void Init()
+    {
+
+    }
 }

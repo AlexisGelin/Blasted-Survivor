@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class LeaderBoardPanel : Panel
 {
+    public override void Init()
+    {
+        base.Init();
+
+        HighscoreTable.Instance.Init();
+    }
 
 }

@@ -8,7 +8,10 @@ enum MenuState { centered, around }
 
 public class MenuView : View
 {
-    [SerializeField] Panel _menuPanel, _settingPanel, _accountPanel;
+    [SerializeField] MenuPanel _menuPanel;
+    [SerializeField] SettingPanel _settingPanel;
+    [SerializeField] LeaderBoardPanel _leaderBoardPanel;
+
     [SerializeField] float _speedToSwitchPanel = .2f;
 
     MenuState _state;
@@ -18,6 +21,10 @@ public class MenuView : View
     public override void Init()
     {
         base.Init();
+
+        _menuPanel.Init();
+        _settingPanel.Init();
+        _leaderBoardPanel.Init();
     }
 
     public override void OpenView()
