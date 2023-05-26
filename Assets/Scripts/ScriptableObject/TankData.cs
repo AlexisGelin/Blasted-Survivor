@@ -6,8 +6,8 @@ using UnityEngine;
 public class TankData : ScriptableObject
 {
     public string Name;
-    public int Health, BodyDamage, Speed, ExpOnDestroy;
-    public float FireRate, HealthRegeneration;
+    public int Health, BodyDamage, ExpOnDestroy;
+    public float FireRate, Speed, HealthRegeneration;
     public BulletData Bullet;
     public TankRenderer Renderer;
 

@@ -6,6 +6,6 @@ using UnityEngine;
 [Serializable]
 public class BulletData
 {
-    public int Damage, Penetration, Speed;
-    public float BulletSize;
+    public int Damage, Penetration;
+    public float BulletSize, Speed;
 }

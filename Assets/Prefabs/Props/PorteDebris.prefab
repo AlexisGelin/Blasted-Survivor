@@ -1295,6 +1295,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2838806851818922001, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
     - target: {fileID: 2838806852715460076, guid: 2c2a1ca344b9afb4d93a4bffdcd6d4bb, type: 3}
       propertyPath: m_Animation
       value: 

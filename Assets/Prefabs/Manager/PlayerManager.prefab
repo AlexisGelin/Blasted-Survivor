@@ -48,3 +48,11 @@ MonoBehaviour:
   _exp: 0
   _coin: 0
   _name: 
+  healthRegenerationUpdate: 0.5
+  healthUpdate: 20
+  bodyDamageUpgrade: 10
+  bulletSpeedUpgrade: 1
+  bulletPenetrationUpdate: 1
+  bulletDamageUpdate: 20
+  bulletFireRateUpdate: 0.04
+  speedUpdate: 0.5

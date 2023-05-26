@@ -16,6 +16,9 @@ public class Porte : MonoBehaviour
     [SerializeField] List<Transform> floatingTextTransform;
     [SerializeField] List<Transform> placeHolderSpawnEnemies;
 
+    [SerializeField] bool isNextRoomHaveSeveralsEntry;
+    [SerializeField] List<Porte> otherDoorInNextRoom;
+
     private bool isPay = false;
 
     private void Start()
@@ -72,8 +75,20 @@ public class Porte : MonoBehaviour
             {
                 SpawnPointEnemyManager.Instance.enemySpawnPoints.Add(t);
             }
+            if (isNextRoomHaveSeveralsEntry)
+            {
+                foreach(Porte porte in otherDoorInNextRoom)
+                {
+                    porte.ClearListSpawnPoint();
+                }
+            }
 
             isPay = true;
         }
+    }
+
+    public void ClearListSpawnPoint()
+    {
+        placeHolderSpawnEnemies.Clear();
     }
 }

@@ -42,8 +42,8 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     public int GetCurrentMaxHealth { get { return _maxHealth + _upgradeData.Health; } }
     public int GetCurrentBodyDamage { get { return _data.BodyDamage + _upgradeData.BodyDamage; } }
     public float GetCurrentHealthRegeneration { get { return _data.HealthRegeneration + _upgradeData.HealthRegeneration; } }
-    public int GetCurrentSpeed { get { return _data.Speed + _upgradeData.Speed; } }
-    public int GetCurrentBulletSpeed { get { return _data.Bullet.Speed + _upgradeData.Bullet.Speed; } }
+    public float GetCurrentSpeed { get { return _data.Speed + _upgradeData.Speed; } }
+    public float GetCurrentBulletSpeed { get { return _data.Bullet.Speed + _upgradeData.Bullet.Speed; } }
     public int GetCurrentBulletDamage { get { return _data.Bullet.Damage + _upgradeData.Bullet.Damage; } }
     public int GetCurrentBulletPenetration { get { return _data.Bullet.Penetration + _upgradeData.Bullet.Penetration; } }
     public float GetCurrentFireRate { get { return _data.FireRate + _upgradeData.FireRate; } }
@@ -219,7 +219,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             case "HealthRegeneration": // Fait
                 if (_healthRegenLevel >= MAX_LEVEL_UPGRADE) return;
 
-                _upgradeData.HealthRegeneration += .5f;
+                _upgradeData.HealthRegeneration += PlayerManager.Instance.HealthRegenerationUpdate;
 
                 _healthRegenLevel++;
 
@@ -228,8 +228,8 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             case "Health": // Fait
                 if (_healthLevel >= MAX_LEVEL_UPGRADE) return;
 
-                _upgradeData.Health += 20;
-                _health += 20;
+                _upgradeData.Health += PlayerManager.Instance.HealthUpdate;
+                _health += PlayerManager.Instance.HealthUpdate;
 
                 _healthLevel++;
 
@@ -240,7 +240,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             case "BodyDamage": // Fait
                 if (_bodyDamageLevel >= MAX_LEVEL_UPGRADE) return;
 
-                _upgradeData.BodyDamage += 10;
+                _upgradeData.BodyDamage += PlayerManager.Instance.BodyDamageUpgrade;
 
                 _bodyDamageLevel++;
 
@@ -249,7 +249,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             case "BulletSpeed": // fait
                 if (_bulletSpeedLevel >= MAX_LEVEL_UPGRADE) return;
 
-                _upgradeData.Bullet.Speed += 1;
+                _upgradeData.Bullet.Speed += PlayerManager.Instance.BulletSpeedUpgrade;
 
                 _bulletSpeedLevel++;
 
@@ -258,7 +258,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             case "BulletPenetration": // fait
                 if (_bulletPenetrationLevel >= MAX_LEVEL_UPGRADE) return;
 
-                _upgradeData.Bullet.Penetration += 1;
+                _upgradeData.Bullet.Penetration += PlayerManager.Instance.BulletPenetrationUpdate;
 
                 _bulletPenetrationLevel++;
 
@@ -267,7 +267,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             case "BulletDamage": // fait
                 if (_bulletDamageLevel >= MAX_LEVEL_UPGRADE) return;
 
-                _upgradeData.Bullet.Damage += 1;
+                _upgradeData.Bullet.Damage += PlayerManager.Instance.BulletDamageUpdate;
 
                 _bulletDamageLevel++;
 
@@ -276,7 +276,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             case "FireRate": // fait
                 if (_bulletReloadLevel >= MAX_LEVEL_UPGRADE) return;
 
-                _upgradeData.FireRate += 0.1f;
+                _upgradeData.FireRate += PlayerManager.Instance.BulletFireRateUpdate;
 
                 _bulletReloadLevel++;
 
@@ -285,7 +285,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             case "Speed": // fait
                 if (_movementSpeedLevel >= MAX_LEVEL_UPGRADE) return;
 
-                _upgradeData.Speed += 1;
+                _upgradeData.Speed += PlayerManager.Instance.SpeedUpdate;
 
                 _movementSpeedLevel++;
 
