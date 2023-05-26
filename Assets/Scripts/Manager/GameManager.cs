@@ -12,13 +12,18 @@ public class GameManager : MonoSingleton<GameManager>
 {
 
     GameState _gameState;
+    bool _isGamePause;
 
     public GameState GameState { get => _gameState; }
+    public bool IsGamePause { get => _isGamePause; }
 
     public event Action<GameState> OnGameStateChanged;
 
+
     void Awake()
     {
+        Time.timeScale = 1;
+
         AudioManager.Instance.Init();
 
         PoolManager.Instance.Init();
@@ -45,6 +50,29 @@ public class GameManager : MonoSingleton<GameManager>
         if (Input.GetKeyUp(KeyCode.R))
         {
             ReloadScene();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (GameState == GameState.PLAY)
+            {
+                TogglePause();
+            }
+        }
+    }
+
+    public void TogglePause()
+    {
+        _isGamePause = !_isGamePause;
+        if (_isGamePause)
+        {
+            Time.timeScale = 0;
+            UIManager.Instance.HandleEnterPause();
+        }
+        else
+        {
+            Time.timeScale = 1;
+            UIManager.Instance.HandleExitPause();
         }
     }
 
@@ -86,4 +114,8 @@ public class GameManager : MonoSingleton<GameManager>
         OnGameStateChanged?.Invoke(_gameState);
     }
 
+
+    public void UpdateStateToMenu() => UpdateGameState(GameState.MENU);
+    public void UpdateStateToPlay() => UpdateGameState(GameState.PLAY);
+    public void UpdateStateToEnd() => UpdateGameState(GameState.END);
 }

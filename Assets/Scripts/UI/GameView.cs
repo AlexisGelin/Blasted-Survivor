@@ -8,7 +8,7 @@ public class GameView : View
 {
     public UpgradePopup UpgradePopup;
     [SerializeField] TMP_Text _playerName, _coins, _waves, _timerBeforeWaves;
-    [SerializeField] SliderBar _levelBar, _healthBar;
+    [SerializeField] SliderBar _enemyBar, _healthBar;
 
     RectTransform upgradePopUpRT;
 
@@ -35,7 +35,6 @@ public class GameView : View
     {
         _playerName.text = PlayerManager.Instance.Name;
         InitHealthBar();
-        InitExpBar();
         UpdateCoins();
         UpdateWaves();
         _timerBeforeWaves.text = "";
@@ -66,12 +65,12 @@ public class GameView : View
 
     #region UpdateUI
 
-    public void UpdateExpBar() => _levelBar.SetBar(PlayerManager.Instance.Exp);
+    public void UpdateEnemyBar() => _enemyBar.SetBar(WaveManager.Instance.numberOfEnemyRemaining);
     public void UpdateHealthBar() => _healthBar.SetBar(PlayerController.Instance.GetCurrentHealth, true);
-    public void InitExpBar() => _levelBar.SetMaxBarWithText(PlayerManager.Instance.GetCurrentExpForNextLevel, PlayerManager.Instance.Exp, "Level : " + PlayerManager.Instance.Level);
+    public void InitEnemyBar() => _enemyBar.SetMaxBarWithText(WaveManager.Instance.numberOfEnemyRemaining, WaveManager.Instance.numberOfEnemyRemaining, "Enemy left : " + WaveManager.Instance.numberOfEnemyRemaining);
     public void InitHealthBar() => _healthBar.SetMaxBar(PlayerController.Instance.GetCurrentMaxHealth, PlayerController.Instance.GetCurrentHealth, true);
     public void UpdateCoins() => _coins.text = PlayerManager.Instance.Coin + " coins";
-    public void UpdateWaves() => _waves.text = "Wave : " + 0; //Wave manager get current Wave
+    public void UpdateWaves() => _waves.text = "Wave : " + WaveManager.Instance.CurrentIndexOfWaves;
 
     public void HandleUpgradeHealthRegen()
     {

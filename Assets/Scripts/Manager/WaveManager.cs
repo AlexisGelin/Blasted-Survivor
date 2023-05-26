@@ -9,6 +9,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     [SerializeField] float delayBetweenWave;
     [SerializeField] float timerForEachSpawnEnemy;
     [SerializeField] List<Wave> waves;
+    [SerializeField] Vector2 coinPerKill;
 
     public int numberOfEnemyRemaining;
     private int numberOfEnemyRemainingBase;
@@ -16,6 +17,8 @@ public class WaveManager : MonoSingleton<WaveManager>
     private int currentIndexOfWaves;
     EnemyController enemyControllerToSpawn;
     int baseOfNumberOfEnemyRemaining;
+
+    public int CurrentIndexOfWaves { get => currentIndexOfWaves; }
 
     public void Init()
     {
@@ -30,8 +33,12 @@ public class WaveManager : MonoSingleton<WaveManager>
             UIManager.Instance.GameView.AddPoint(1);
             StartCoroutine(StartNewWave());
         }
+
+        UIManager.Instance.GameView.UpdateEnemyBar();
+        PlayerManager.Instance.UpdateCoins((int)Random.Range(coinPerKill.x + (currentIndexOfWaves * 2), coinPerKill.y + (currentIndexOfWaves * 2)));
+        PlayerManager.Instance.UpdateEnemyKilled(1);
     }
-    
+
 
     IEnumerator StartFirstWave()
     {
@@ -39,9 +46,13 @@ public class WaveManager : MonoSingleton<WaveManager>
 
         numberOfEnemyRemainingBase += waves[currentIndexOfWaves].enemyToAdd;
         numberOfEnemyRemaining = numberOfEnemyRemainingBase;
+
+        UIManager.Instance.GameView.InitEnemyBar();
+
         yield return new WaitForSeconds(delayToInitFirstWave);
         StartCoroutine(SpawnEnemys());
 
+        UIManager.Instance.GameView.InitEnemyBar();
     }
 
     IEnumerator StartNewWave()
@@ -55,6 +66,9 @@ public class WaveManager : MonoSingleton<WaveManager>
         numberOfEnemyRemainingBase += waves[currentIndexOfWaves].enemyToAdd;
         numberOfEnemyRemaining = numberOfEnemyRemainingBase;
         StartCoroutine(SpawnEnemys());
+
+        UIManager.Instance.GameView.InitEnemyBar();
+        UIManager.Instance.GameView.UpdateWaves();
     }
 
     IEnumerator SpawnEnemys()
@@ -69,11 +83,9 @@ public class WaveManager : MonoSingleton<WaveManager>
             yield return new WaitForSeconds(timerForEachSpawnEnemy);
         }
     }
-
-    
 }
 
-[System.Serializable] 
+[System.Serializable]
 public class Wave
 {
     public int enemyToAdd;

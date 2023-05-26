@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class EndGameView : View
+public class PauseView : View
 {
-    [SerializeField] TMP_Text _totalTime, _totalEnemyKilled, _totalWaves;
 
+    [SerializeField] TMP_Text _totalTime, _totalEnemyKilled, _totalWaves;
     public override void Init()
     {
         base.Init();
