@@ -15,14 +15,14 @@ public class CustomButton : Button
     {
         base.OnPointerDown(eventData);
 
-        if (interactable) rt.DOScale(new Vector3(.9f, .9f, .9f), timeOfEffects).SetEase(Ease.OutExpo);
+        if (interactable) rt.DOScale(new Vector3(.9f, .9f, .9f), timeOfEffects).SetEase(Ease.OutExpo).SetUpdate(UpdateType.Normal, true); ;
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
         base.OnPointerUp(eventData);
 
-        if (interactable) rt.DOScale(Vector3.one, timeOfEffects).SetEase(Ease.OutExpo);
+        if (interactable) rt.DOScale(Vector3.one, timeOfEffects).SetEase(Ease.OutExpo).SetUpdate(UpdateType.Normal, true); ;
     }
 
     public override void OnPointerEnter(PointerEventData eventData)

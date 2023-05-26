@@ -89,10 +89,7 @@ public class Bullet : MonoBehaviour
 
             tempEnemy.Rb.AddForce(_rb.velocity);
 
-            if (tempEnemy.TakeDamage(_data.Damage + _upgradeData.Damage))
-            {
-                PlayerManager.Instance.IncreaseExp(tempEnemy.Data.ExpOnDestroy);
-            }
+            tempEnemy.TakeDamage(_data.Damage + _upgradeData.Damage);
 
             DOTween.Sequence()
                 .Join(circle.transform.DOPunchScale(new Vector3(.2f, .2f, .2f), .1f))

@@ -5,43 +5,27 @@ using UnityEngine;
 
 public class PlayerManager : MonoSingleton<PlayerManager>
 {
-    [SerializeField] int _level = 0, _exp = 0, _coin = 0;
+    [SerializeField] int _coin = 0, _totalEnemyKilled = 0;
     [SerializeField] string _name = "Unnamed tank";
 
-    public int GetCurrentExpForNextLevel { get { return ExpForNextLevel(); } }
+    float _totalTime;
 
     public string Name { get => _name; }
-    public int Level { get => _level; }
-    public int Exp { get => _exp; }
     public int Coin { get => _coin; }
+    public float TotalTime { get => _totalTime; }
+    public int TotalEnemyKilled { get => _totalEnemyKilled; }
 
     private void Update()
     {
+        if (GameManager.Instance.IsGamePause == false && GameManager.Instance.GameState == GameState.PLAY) _totalTime += Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             UpdateCoins(1000);
         }
     }
 
-    int ExpForNextLevel()
-    {
-        return 20;
-    }
 
-    public void IncreaseExp(int expToAdd)
-    {
-        if (_exp + expToAdd >= GetCurrentExpForNextLevel)
-        {
-            _exp += expToAdd;
-            IncreaseLevel(_exp - GetCurrentExpForNextLevel);
-        }
-        else
-        {
-            _exp += expToAdd;
-        }
-
-        UIManager.Instance.GameView.UpdateExpBar();
-    }
 
     public void UpdateCoins(int number)
     {
@@ -49,12 +33,8 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         UIManager.Instance.GameView.UpdateCoins();
     }
 
-    void IncreaseLevel(int expLeft = 0)
+    public void UpdateEnemyKilled(int number)
     {
-        _level++;
-        _exp = 0;
-        IncreaseExp(expLeft);
-
-        UIManager.Instance.GameView.InitExpBar();
+        _totalEnemyKilled += number;
     }
 }

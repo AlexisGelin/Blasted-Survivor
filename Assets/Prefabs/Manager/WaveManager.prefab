@@ -76,4 +76,5 @@ MonoBehaviour:
     enemyHealthToAdd: 10
   - enemyToAdd: 7
     enemyHealthToAdd: 10
+  coinPerKill: {x: 20, y: 80}
   numberOfEnemyRemaining: 0

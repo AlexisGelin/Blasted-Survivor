@@ -6,13 +6,14 @@ using UnityEngine;
 
 public class UIManager : MonoSingleton<UIManager>
 {
-    [SerializeField] View _menuView, _gameView, _endGameView;
+    [SerializeField] View _menuView, _gameView, _endGameView, _pauseView;
 
     View _currentView;
 
     public MenuView MenuView { get => (MenuView)_menuView; }
     public GameView GameView { get => (GameView)_gameView; }
     public EndGameView EndGameView { get => (EndGameView)_endGameView; }
+    public PauseView PauseView { get => (PauseView)_pauseView; }
 
     public void Init()
     {
@@ -27,7 +28,7 @@ public class UIManager : MonoSingleton<UIManager>
     {
         if (_currentView != null && _currentView != newView)
         {
-            _currentView.CG.DOFade(0, .2f);
+            _currentView.CG.DOFade(0, .2f).SetUpdate(UpdateType.Normal,true);
 
             _currentView.CG.interactable = false;
             _currentView.CG.blocksRaycasts = false;
@@ -40,7 +41,7 @@ public class UIManager : MonoSingleton<UIManager>
 
         _currentView.OpenView();
 
-        _currentView.CG.DOFade(1, .2f);
+        _currentView.CG.DOFade(1, .2f).SetUpdate(UpdateType.Normal, true);
 
         _currentView.CG.interactable = true;
         _currentView.CG.blocksRaycasts = true;
@@ -62,5 +63,14 @@ public class UIManager : MonoSingleton<UIManager>
             default:
                 break;
         }
+    }
+
+    public void HandleEnterPause()
+    {
+        SwitchView(_pauseView);
+    }
+    public void HandleExitPause()
+    {
+        SwitchView(_gameView);
     }
 }
