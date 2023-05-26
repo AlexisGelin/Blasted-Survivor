@@ -1,6 +1,11 @@
 fileFormatVersion: 2
-guid: 8c9cfa26abfee488c85f1582747f6a02
+<<<<<<<< HEAD:Assets/Prefabs/Manager/TimeManager.prefab.meta
+guid: 26e04f458f4235d4a9c976fd37f4a7d2
+PrefabImporter:
+========
+guid: c87f0f21117e630418fdf9e21a61aab8
 DefaultImporter:
+>>>>>>>> origin/SpawnPointEnnemis:Assets/Scenes/MainSceneOrian.unity.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
