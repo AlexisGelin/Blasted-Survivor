@@ -14,6 +14,7 @@ public class Porte : MonoBehaviour
     [SerializeField] GameObject LockParent;
     [SerializeField] ParticleSystem ExplosionDoorParticles;
     [SerializeField] List<Transform> floatingTextTransform;
+    [SerializeField] List<Transform> placeHolderSpawnEnemies;
 
     private bool isPay = false;
 
@@ -67,6 +68,11 @@ public class Porte : MonoBehaviour
             LockParent.SetActive(false);
             PlayerManager.Instance.UpdateCoins(-doorPrice);
             glowDoorAnimator.SetTrigger("Stop");
+            foreach(Transform t in placeHolderSpawnEnemies)
+            {
+                SpawnPointEnemyManager.Instance.enemySpawnPoints.Add(t);
+            }
+
             isPay = true;
         }
     }

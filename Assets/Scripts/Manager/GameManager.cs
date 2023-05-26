@@ -34,6 +34,8 @@ public class GameManager : MonoSingleton<GameManager>
 
         WorldManager.Instance.Init();
 
+        SpawnPointEnemyManager.Instance.Init();
+
         UpdateGameState(GameState.MENU);
 
     }

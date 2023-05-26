@@ -7,6 +7,7 @@ public class WaveManager : MonoSingleton<WaveManager>
 {
     [SerializeField] float delayToInitFirstWave;
     [SerializeField] float delayBetweenWave;
+    [SerializeField] float timerForEachSpawnEnemy;
     [SerializeField] List<Wave> waves;
 
     public int numberOfEnemyRemaining;
@@ -61,7 +62,8 @@ public class WaveManager : MonoSingleton<WaveManager>
             enemyControllerToSpawn = EnemyPoolManager.Instance.GetPooledEnemy(0);
             enemyControllerToSpawn.Init();
             enemyControllerToSpawn.gameObject.SetActive(true);
-            yield return new WaitForEndOfFrame();
+            enemyControllerToSpawn.transform.position = SpawnPointEnemyManager.Instance.searchBestSpawnPoint().position;
+            yield return new WaitForSeconds(timerForEachSpawnEnemy);
         }
     }
 
