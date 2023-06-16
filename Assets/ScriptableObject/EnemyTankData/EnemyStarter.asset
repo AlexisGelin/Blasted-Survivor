@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: EnemyStarter
   m_EditorClassIdentifier: 
   Name: Starter
-  Health: 100
+  Health: 50
   BodyDamage: 10
-  Speed: 2
   ExpOnDestroy: 5
   FireRate: 0.5
+  Speed: 2
   HealthRegeneration: 0
   Bullet:
     Damage: 25
     Penetration: 2
+    BulletSize: 0
     Speed: 5
   Renderer: {fileID: 3582898628122688570, guid: 9e51f74e88270a24e9277bfae4e34bec, type: 3}

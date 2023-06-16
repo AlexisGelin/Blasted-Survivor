@@ -29,4 +29,14 @@ public class PauseView : View
     {
         base.CloseView();
     }
+
+    public void HandleContinueGame()
+    {
+        GameManager.Instance.TogglePause();
+    }
+
+    public void HandleQuitGame()
+    {
+        GameManager.Instance.UpdateStateToEnd();
+    }
 }

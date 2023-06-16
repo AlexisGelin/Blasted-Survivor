@@ -15,6 +15,8 @@ public class CustomButton : Button
     {
         base.OnPointerDown(eventData);
 
+        AudioManager.Instance.PlaySound("ClickButton");
+
         if (interactable) rt.DOScale(new Vector3(.9f, .9f, .9f), timeOfEffects).SetEase(Ease.OutExpo).SetUpdate(UpdateType.Normal, true); ;
     }
 

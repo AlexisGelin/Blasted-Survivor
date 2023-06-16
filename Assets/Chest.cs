@@ -98,6 +98,8 @@ public class Chest : MonoBehaviour
             PlayerManager.Instance.UpdateCoins(-_chestPrice);
             _isPay = true;
 
+            AudioManager.Instance.PlaySound("OpenChest");
+
             StartCoroutine(CanEquip());
 
             ShowReward();

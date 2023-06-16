@@ -65,7 +65,7 @@ public class GameView : View
 
     #region UpdateUI
 
-    public void UpdateEnemyBar() => _enemyBar.SetBar(WaveManager.Instance.numberOfEnemyRemaining);
+    public void UpdateEnemyBar() => _enemyBar.SetBar(WaveManager.Instance.numberOfEnemyRemaining,"ENEMY LEFT : ");
     public void UpdateHealthBar() => _healthBar.SetBar(PlayerController.Instance.GetCurrentHealth, true);
     public void InitEnemyBar() => _enemyBar.SetMaxBarWithText(WaveManager.Instance.numberOfEnemyRemaining, WaveManager.Instance.numberOfEnemyRemaining, "Enemy left : " + WaveManager.Instance.numberOfEnemyRemaining);
     public void InitHealthBar() => _healthBar.SetMaxBar(PlayerController.Instance.GetCurrentMaxHealth, PlayerController.Instance.GetCurrentHealth, true);

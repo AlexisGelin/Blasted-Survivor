@@ -165,6 +165,9 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
         {
             _nextFire = Time.time + _data.FireRate - _upgradeData.FireRate;
 
+            AudioManager.Instance.PlaySound("PlayerShoot");
+
+
             if (_playerRegenCoroutine != null)
             {
                 StopCoroutine(_playerRegenCoroutine);
@@ -299,6 +302,8 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
         _health -= amount;
         if (_health < 0) _health = 0;
 
+        AudioManager.Instance.PlaySound("PlayerHit");
+
         UIManager.Instance.GameView.UpdateHealthBar();
 
         PostProcessManager.Instance.DoVignetteFlash(1f, 1f);
@@ -316,6 +321,8 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             CameraManager.Instance.ZoomHit(.5f, .2f, true);
 
             GameManager.Instance.UpdateStateToEnd();
+
+            AudioManager.Instance.PlaySound("LooseGame");
 
             return true;
         }

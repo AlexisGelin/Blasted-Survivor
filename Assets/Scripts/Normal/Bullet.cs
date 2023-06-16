@@ -39,7 +39,6 @@ public class Bullet : MonoBehaviour
 
         _trailRendererBoing = DOVirtual.Float(1, .4f, .1f, x => _trailRenderer.widthMultiplier = x).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
 
-
         _bulletFade.DOFade(1, 0);
         _bulletFace.DOFade(1, 0);
 
@@ -81,10 +80,10 @@ public class Bullet : MonoBehaviour
         var circleFX = Instantiate(_circleFX, transform.position, Quaternion.identity);
         var circle = circleFX.GetComponent<SpriteRenderer>();
 
-
-
         if (collision.gameObject.layer == 20)
         {
+            AudioManager.Instance.PlaySound("EnemyHit");
+
             EnemyController tempEnemy = collision.gameObject.GetComponent<EnemyController>();
 
             tempEnemy.Rb.AddForce(_rb.velocity);
@@ -109,6 +108,9 @@ public class Bullet : MonoBehaviour
 
         if (collision.gameObject.layer == 30 || collision.gameObject.layer == 31)
         {
+
+            AudioManager.Instance.PlaySound("WallHit");
+
             DOTween.Sequence()
                 .Join(circle.transform.DOPunchScale(new Vector3(.1f, .1f, .1f), .1f))
                 .Append(circle.DOFade(0, .1f));

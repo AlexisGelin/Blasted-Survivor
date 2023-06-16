@@ -65,6 +65,8 @@ public class Porte : MonoBehaviour
     {
         if (PlayerController.Instance.IsInteract && !isPay && PlayerManager.Instance.Coin >= doorPrice)
         {
+            AudioManager.Instance.PlaySound("OpenDoor");
+
             wallCollider.gameObject.SetActive(false);
             ExplosionDoorParticles.Play();
             ExplodeAnimationDoor.Play();
