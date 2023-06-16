@@ -78,13 +78,15 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var circleFX = Instantiate(_circleFX, transform.position, Quaternion.identity);
-        var circle = circleFX.GetComponent<SpriteRenderer>();
+
 
 
 
         if (collision.gameObject.layer == 20)
         {
+            var circleFX = Instantiate(_circleFX, transform.position, Quaternion.identity);
+            var circle = circleFX.GetComponent<SpriteRenderer>();
+
             EnemyController tempEnemy = collision.gameObject.GetComponent<EnemyController>();
 
             tempEnemy.Rb.AddForce(_rb.velocity);
@@ -109,6 +111,9 @@ public class Bullet : MonoBehaviour
 
         if (collision.gameObject.layer == 30 || collision.gameObject.layer == 31)
         {
+            var circleFX = Instantiate(_circleFX, transform.position, Quaternion.identity);
+            var circle = circleFX.GetComponent<SpriteRenderer>();
+
             DOTween.Sequence()
                 .Join(circle.transform.DOPunchScale(new Vector3(.1f, .1f, .1f), .1f))
                 .Append(circle.DOFade(0, .1f));

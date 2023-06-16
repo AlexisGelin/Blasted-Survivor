@@ -30,6 +30,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         numberOfEnemyRemaining--;
         if (numberOfEnemyRemaining <= 0)
         {
+            numberOfEnemyRemaining = 0;
             UIManager.Instance.GameView.AddPoint(1);
             StartCoroutine(StartNewWave());
         }
@@ -38,7 +39,6 @@ public class WaveManager : MonoSingleton<WaveManager>
         PlayerManager.Instance.UpdateCoins((int)Random.Range(coinPerKill.x + (currentIndexOfWaves * 2), coinPerKill.y + (currentIndexOfWaves * 2)));
         PlayerManager.Instance.UpdateEnemyKilled(1);
     }
-
 
     IEnumerator StartFirstWave()
     {

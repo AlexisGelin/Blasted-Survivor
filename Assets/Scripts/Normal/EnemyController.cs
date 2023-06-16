@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour, IHealth
 
     Sequence _damageColorTweek;
     List<Sequence> _damageColorTweeks = new List<Sequence>();
+    bool isDead;
 
     public AIPath aIPath;
 
@@ -26,6 +27,8 @@ public class EnemyController : MonoBehaviour, IHealth
 
     public void Init()
     {
+        isDead = false;
+
         _health = _data.Health;
 
         _rb.simulated = true;
@@ -38,36 +41,40 @@ public class EnemyController : MonoBehaviour, IHealth
 
     public bool TakeDamage(int amount)
     {
-        _health -= amount;
-
-        if (_damageColorTweeks != null)
+        if (!isDead)
         {
-            foreach (var tween in _damageColorTweeks)
+
+            _health -= amount;
+
+            if (_damageColorTweeks != null)
             {
-                tween.Complete();
+                foreach (var tween in _damageColorTweeks)
+                {
+                    tween.Complete();
+                }
             }
-        }
 
+            foreach (var sprite in _sprites)
+            {
+                Color tempColor = sprite.color;
 
-        foreach (var sprite in _sprites)
-        {
-            Color tempColor = sprite.color;
+                _damageColorTweek = DOTween.Sequence();
 
-            _damageColorTweek = DOTween.Sequence();
+                _damageColorTweek.Join(sprite.DOColor(Color.white, .1f))
+                    .Join(transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), .1f))
+                    .Append(sprite.DOColor(tempColor, .1f))
+                    .Join(transform.DOScale(Vector3.one, .1f));
 
-            _damageColorTweek.Join(sprite.DOColor(Color.white, .1f))
-                .Join(transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), .1f))
-                .Append(sprite.DOColor(tempColor, .1f))
-                .Join(transform.DOScale(Vector3.one, .1f));
+                _damageColorTweeks.Add(_damageColorTweek);
+            }
 
-            _damageColorTweeks.Add(_damageColorTweek);
-        }
-
-        if (_health <= 0)
-        {
-            WaveManager.Instance.EnnemyDie();
-            StartCoroutine(ScaleTankAndDisable());
-            return true;
+            if (_health <= 0)
+            {
+                isDead = true;
+                WaveManager.Instance.EnnemyDie();
+                StartCoroutine(ScaleTankAndDisable());
+                return true;
+            }
         }
 
         return false;

@@ -10,11 +10,28 @@ public class WorldManager : MonoSingleton<WorldManager>
 {
     [SerializeField] List<Chest> _chests;
     [SerializeField] List<ChestDataPool> _chestsData;
+    [SerializeField] int numberOfChestActive;
 
+    List<Chest> chestChoosen;
+    List<Chest> chestCanBeActivate;
+    int indexOfChestChoosen;
     public void Init()
     {
-        foreach( Chest chest in _chests)
+        chestChoosen = new List<Chest>();
+        chestCanBeActivate = _chests;
+        
+
+        for (int i =0; i < numberOfChestActive; i++)
         {
+            indexOfChestChoosen = Random.Range(1, _chests.Count);
+
+            chestChoosen.Add(chestCanBeActivate[indexOfChestChoosen]);
+            chestCanBeActivate.RemoveAt(indexOfChestChoosen);
+        }
+
+        foreach ( Chest chest in chestChoosen)
+        {
+            chest.gameObject.SetActive(true);
             chest.Init(GetRandomChestData());
         }
     }
@@ -41,6 +58,21 @@ public class WorldManager : MonoSingleton<WorldManager>
         }
 
         return _chestsData.Last().ChestData;
+    }
+
+    public void GetNewChest(Chest chestDisable)
+    {
+        indexOfChestChoosen = Random.Range(0, chestCanBeActivate.Count);
+
+        chestChoosen.Remove(chestDisable);
+        chestChoosen.Add(chestCanBeActivate[indexOfChestChoosen]);
+
+        chestCanBeActivate[indexOfChestChoosen].gameObject.SetActive(true);
+        chestCanBeActivate[indexOfChestChoosen].Init(GetRandomChestData());
+
+        chestCanBeActivate.RemoveAt(indexOfChestChoosen);
+        
+        chestCanBeActivate.Add(chestDisable);
     }
 }
 

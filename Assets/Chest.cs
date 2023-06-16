@@ -91,6 +91,10 @@ public class Chest : MonoBehaviour
             PlayerController.Instance.Evolve(_tankData.Name);
 
             HideReward();
+
+            WorldManager.Instance.GetNewChest(this);
+
+            gameObject.SetActive(false);
         }
 
         if (PlayerController.Instance.IsInteract && !_isPay && PlayerManager.Instance.Coin >= _chestPrice)
