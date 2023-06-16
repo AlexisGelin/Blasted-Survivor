@@ -40,7 +40,12 @@ public class SettingPanel : Panel
     public void SetMusicVolume(float volume) => audioMixer.SetFloat("MusicVolume", volume);
     public void SetSFXVolume(float volume) => audioMixer.SetFloat("SFXVolume", volume);
     public void SetQuality(int qualityIndex) => QualitySettings.SetQualityLevel(qualityIndex);
-    public void SetFullScreen(bool isFullscreen) => Screen.fullScreen = isFullscreen;
+    public void SetFullScreen(bool isFullscreen)
+    {
+        AudioManager.Instance.PlaySound("ToggleButton");
+
+        Screen.fullScreen = isFullscreen;
+    }
     public void SetResolution(int resolutionIndex)
     {
         Resolution newResolution = resolutions[resolutionIndex];

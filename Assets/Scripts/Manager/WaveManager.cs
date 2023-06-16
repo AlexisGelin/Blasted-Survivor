@@ -28,11 +28,14 @@ public class WaveManager : MonoSingleton<WaveManager>
     public void EnnemyDie()
     {
         numberOfEnemyRemaining--;
+        Debug.Log(numberOfEnemyRemaining);
         if (numberOfEnemyRemaining <= 0)
         {
             numberOfEnemyRemaining = 0;
             UIManager.Instance.GameView.AddPoint(1);
             StartCoroutine(StartNewWave());
+
+            AudioManager.Instance.PlaySound("EndWave");
         }
 
         UIManager.Instance.GameView.UpdateEnemyBar();

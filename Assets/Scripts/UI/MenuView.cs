@@ -73,6 +73,8 @@ public class MenuView : View
 
     public void HandleStartButton()
     {
+        AudioManager.Instance.PlaySound("StartGame");
+
         PlayerManager.Instance.Name = _nameInputField.text;
 
         GameManager.Instance.StartGame();
