@@ -23,8 +23,9 @@ public class HighscoreTable : MonoSingleton<HighscoreTable>
         {
             // There's no stored table, initialize
             Debug.Log("Initializing table with default values...");
-            AddHighscoreEntry(13072002, "ORIAN");
-            AddHighscoreEntry(7052002, "ALEXIS");
+            AddHighscoreEntry(13722, "ORIAN");
+            AddHighscoreEntry(7522, "ALEXIS");
+
 
 
             // Reload
@@ -99,7 +100,7 @@ public class HighscoreTable : MonoSingleton<HighscoreTable>
         transformList.Add(entryTransform);
     }
 
-    private void AddHighscoreEntry(int score, string name)
+    public void AddHighscoreEntry(int score, string name)
     {
         // Create HighscoreEntry
         HighscoreEntry highscoreEntry = new HighscoreEntry { score = score, name = name };

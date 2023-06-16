@@ -1,8 +1,10 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UI;
 
 enum MenuState { centered, around }
 
@@ -11,6 +13,7 @@ public class MenuView : View
     [SerializeField] MenuPanel _menuPanel;
     [SerializeField] SettingPanel _settingPanel;
     [SerializeField] LeaderBoardPanel _leaderBoardPanel;
+    [SerializeField] TMP_InputField _nameInputField;
 
     [SerializeField] float _speedToSwitchPanel = .2f;
 
@@ -68,6 +71,11 @@ public class MenuView : View
         else _state = MenuState.centered;
     }
 
-    public void HandleStartButton() => GameManager.Instance.StartGame();
+    public void HandleStartButton()
+    {
+        PlayerManager.Instance.Name = _nameInputField.text;
+
+        GameManager.Instance.StartGame();
+    }
 
 }

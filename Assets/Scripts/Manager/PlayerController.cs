@@ -315,7 +315,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
             CameraManager.Instance.ZoomHit(.5f, .2f, true);
 
-            GameManager.Instance.UpdateGameState(GameState.END);
+            GameManager.Instance.UpdateStateToEnd();
 
             return true;
         }

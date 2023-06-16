@@ -10,10 +10,10 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
     float _totalTime;
 
-    public string Name { get => _name; }
     public int Coin { get => _coin; }
     public float TotalTime { get => _totalTime; }
     public int TotalEnemyKilled { get => _totalEnemyKilled; }
+    public string Name { get => _name; set => _name = value; }
 
     private void Update()
     {

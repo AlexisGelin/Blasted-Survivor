@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public enum GameState { MENU, PLAY, END }
 
@@ -108,6 +109,8 @@ public class GameManager : MonoSingleton<GameManager>
             case GameState.PLAY:
                 break;
             case GameState.END:
+
+                HighscoreTable.Instance.AddHighscoreEntry(PlayerManager.Instance.TotalEnemyKilled, PlayerManager.Instance.Name);
                 break;
         }
 
