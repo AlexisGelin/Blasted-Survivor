@@ -29,4 +29,6 @@ public class EndGameView : View
     {
         base.CloseView();
     }
+
+    public void HandleReloadScene() => GameManager.Instance.ReloadScene();
 }

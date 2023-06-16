@@ -25,6 +25,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         Time.timeScale = 1;
 
+        DOTween.SetTweensCapacity(500,150);
+
         AudioManager.Instance.Init();
 
         PoolManager.Instance.Init();
