@@ -5,20 +5,22 @@ using UnityEngine;
 
 public class WaveManager : MonoSingleton<WaveManager>
 {
-    [SerializeField] float delayToInitFirstWave;
-    [SerializeField] float delayBetweenWave;
-    [SerializeField] float timerForEachSpawnEnemy;
-    [SerializeField] List<Wave> waves;
-    [SerializeField] Vector2 coinPerKill;
+    [SerializeField] float _delayToInitFirstWave;
+    [SerializeField] float _delayBetweenWave;
+    [SerializeField] float _timerForEachSpawnEnemy;
+    [SerializeField] List<Wave> _waves;
+    [SerializeField] Vector2 _coinPerKill;
+    [SerializeField] float _probabilityShootEnemySpawn;
+    [SerializeField] float _maxProbabilityShootEnemySpawn;
 
-    public int numberOfEnemyRemaining;
-    private int numberOfEnemyRemainingBase;
+    public int NumberOfEnemyRemaining;
+    private int _numberOfEnemyRemainingBase;
 
-    private int currentIndexOfWaves;
-    EnemyController enemyControllerToSpawn;
-    int baseOfNumberOfEnemyRemaining;
+    private int _currentIndexOfWaves;
+    Enemy _enemyControllerToSpawn;
+    int _baseOfNumberOfEnemyRemaining;
 
-    public int CurrentIndexOfWaves { get => currentIndexOfWaves; }
+    public int CurrentIndexOfWaves { get => _currentIndexOfWaves; }
 
     public void Init()
     {
@@ -27,11 +29,11 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     public void EnnemyDie()
     {
-        numberOfEnemyRemaining--;
-        Debug.Log(numberOfEnemyRemaining);
-        if (numberOfEnemyRemaining <= 0)
+        NumberOfEnemyRemaining--;
+       // Debug.Log(NumberOfEnemyRemaining);
+        if (NumberOfEnemyRemaining <= 0)
         {
-            numberOfEnemyRemaining = 0;
+            NumberOfEnemyRemaining = 0;
             UIManager.Instance.GameView.AddPoint(1);
             StartCoroutine(StartNewWave());
 
@@ -39,20 +41,20 @@ public class WaveManager : MonoSingleton<WaveManager>
         }
 
         UIManager.Instance.GameView.UpdateEnemyBar();
-        PlayerManager.Instance.UpdateCoins((int)Random.Range(coinPerKill.x + (currentIndexOfWaves * 2), coinPerKill.y + (currentIndexOfWaves * 2)));
+        PlayerManager.Instance.UpdateCoins((int)Random.Range(_coinPerKill.x + (_currentIndexOfWaves * 2), _coinPerKill.y + (_currentIndexOfWaves * 2)));
         PlayerManager.Instance.UpdateEnemyKilled(1);
     }
 
     IEnumerator StartFirstWave()
     {
-        currentIndexOfWaves = 0;
+        _currentIndexOfWaves = 0;
 
-        numberOfEnemyRemainingBase += waves[currentIndexOfWaves].enemyToAdd;
-        numberOfEnemyRemaining = numberOfEnemyRemainingBase;
+        _numberOfEnemyRemainingBase += _waves[_currentIndexOfWaves].enemyToAdd;
+        NumberOfEnemyRemaining = _numberOfEnemyRemainingBase;
 
         UIManager.Instance.GameView.InitEnemyBar();
 
-        yield return new WaitForSeconds(delayToInitFirstWave);
+        yield return new WaitForSeconds(_delayToInitFirstWave);
         StartCoroutine(SpawnEnemys());
 
         UIManager.Instance.GameView.InitEnemyBar();
@@ -60,14 +62,14 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     IEnumerator StartNewWave()
     {
-        currentIndexOfWaves++;
-        if (currentIndexOfWaves >= waves.Count)
+        _currentIndexOfWaves++;
+        if (_currentIndexOfWaves >= _waves.Count)
         {
-            currentIndexOfWaves = 0;
+            _currentIndexOfWaves = 0;
         }
-        yield return new WaitForSeconds(delayBetweenWave);
-        numberOfEnemyRemainingBase += waves[currentIndexOfWaves].enemyToAdd;
-        numberOfEnemyRemaining = numberOfEnemyRemainingBase;
+        yield return new WaitForSeconds(_delayBetweenWave);
+        _numberOfEnemyRemainingBase += _waves[_currentIndexOfWaves].enemyToAdd;
+        NumberOfEnemyRemaining = _numberOfEnemyRemainingBase;
         StartCoroutine(SpawnEnemys());
 
         UIManager.Instance.GameView.InitEnemyBar();
@@ -76,14 +78,18 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     IEnumerator SpawnEnemys()
     {
-        baseOfNumberOfEnemyRemaining = numberOfEnemyRemaining;
-        for (int i = 0; i < baseOfNumberOfEnemyRemaining; i++)
+        _baseOfNumberOfEnemyRemaining = NumberOfEnemyRemaining;
+        for (int i = 0; i < _baseOfNumberOfEnemyRemaining; i++)
         {
-            enemyControllerToSpawn = EnemyPoolManager.Instance.GetPooledEnemy(0);
-            enemyControllerToSpawn.gameObject.SetActive(true);
-            enemyControllerToSpawn.Init();
-            enemyControllerToSpawn.transform.position = SpawnPointEnemyManager.Instance.searchBestSpawnPoint().position;
-            yield return new WaitForSeconds(timerForEachSpawnEnemy);
+            if (Random.Range(0, 100) <= _probabilityShootEnemySpawn*100)
+                _enemyControllerToSpawn = EnemyPoolManager.Instance.GetPooledEnemy(1);
+            else
+                _enemyControllerToSpawn = EnemyPoolManager.Instance.GetPooledEnemy(0);
+
+            _enemyControllerToSpawn.gameObject.SetActive(true);
+            _enemyControllerToSpawn.Init();
+            _enemyControllerToSpawn.transform.position = SpawnPointEnemyManager.Instance.searchBestSpawnPoint().position;
+            yield return new WaitForSeconds(_timerForEachSpawnEnemy);
         }
     }
 }

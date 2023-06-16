@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class BulletEnemy : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] SpriteRenderer _bulletFace, _bulletFade;
     [SerializeField] TrailRenderer _trailRenderer;
     [SerializeField] GameObject _onHitFX, _circleFX;
+    [SerializeField] float durationBulletLife;
 
-    BulletData _data, _upgradeData;
+    BulletData _data;
     Coroutine _disableBullet;
     int _penetrationIndex;
 
@@ -21,15 +22,16 @@ public class Bullet : MonoBehaviour
     public BulletData Data { get => _data; }
     public Rigidbody2D Rb { get => _rb; }
 
-    public void Init(BulletData data, BulletData upgradeData, Vector3 direction)
+    public void Init(BulletData data, Vector3 direction)
     {
+        transform.localScale = Vector3.one;
+
         _data = data;
-        _upgradeData = upgradeData;
 
         _direction = direction;
 
-        _penetrationIndex = _data.Penetration + _upgradeData.Penetration;
-        _rb.velocity = _direction * (_data.Speed + _upgradeData.Speed) + (PlayerController.Instance.PlayerVelocity / 10);
+        _penetrationIndex = _data.Penetration;
+        _rb.velocity = _direction * _data.Speed;
         _rb.simulated = true;
 
         transform.localScale = new Vector3(data.BulletSize, data.BulletSize, data.BulletSize);
@@ -47,7 +49,7 @@ public class Bullet : MonoBehaviour
 
     IEnumerator DisableBullet()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(durationBulletLife);
         StartCoroutine(ScaleBulletAndDisable());
     }
 
@@ -77,17 +79,15 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 20)
+        if (collision.gameObject.layer == 10)
         {
             var circleFX = Instantiate(_circleFX, transform.position, Quaternion.identity);
             var circle = circleFX.GetComponent<SpriteRenderer>();
             AudioManager.Instance.PlaySound("EnemyHit");
 
-            Enemy tempEnemy = collision.gameObject.GetComponent<Enemy>();
+            PlayerController.Instance.Rb.AddForce(_rb.velocity);
 
-            tempEnemy.Rb.AddForce(_rb.velocity);
-
-            tempEnemy.TakeDamage(_data.Damage + _upgradeData.Damage);
+            PlayerController.Instance.TakeDamage(_data.Damage);
 
             DOTween.Sequence()
                 .Join(circle.transform.DOPunchScale(new Vector3(.2f, .2f, .2f), .1f))
@@ -125,4 +125,5 @@ public class Bullet : MonoBehaviour
             StartCoroutine(ScaleBulletAndDisable());
         }
     }
+
 }

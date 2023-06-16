@@ -7,11 +7,11 @@ using UnityEngine;
 public class ObjectPoolEnemy
 {
 
-    public EnemyController objectToPool;
+    public Enemy objectToPool;
     public int amountToPool;
     public bool shouldExpand = true;
 
-    public ObjectPoolEnemy(EnemyController obj, int amt, bool exp = true)
+    public ObjectPoolEnemy(Enemy obj, int amt, bool exp = true)
     {
         objectToPool = obj;
         amountToPool = Mathf.Max(amt, 2);
@@ -23,14 +23,14 @@ public class EnemyPoolManager : MonoSingleton<EnemyPoolManager>
 {
 
     public List<ObjectPoolEnemy> enemysToPool;
-    public List<List<EnemyController>> pooledEnemysList;
+    public List<List<Enemy>> pooledEnemysList;
 
-    public List<EnemyController> pooledEnemys;
+    public List<Enemy> pooledEnemys;
     private List<int> positions;
     public void Init()
     {
         //enemysToPool  = new List<ObjectPoolEnemy>();
-        pooledEnemysList = new List<List<EnemyController>>();
+        pooledEnemysList = new List<List<Enemy>>();
         positions = new List<int>();
 
         for (int i = 0; i < enemysToPool.Count; i++)
@@ -39,7 +39,7 @@ public class EnemyPoolManager : MonoSingleton<EnemyPoolManager>
         }
     }
 
-    public EnemyController GetPooledEnemy(int index)
+    public Enemy GetPooledEnemy(int index)
     {
 
         int curSize = pooledEnemysList[index].Count;
@@ -56,7 +56,7 @@ public class EnemyPoolManager : MonoSingleton<EnemyPoolManager>
         if (enemysToPool[index].shouldExpand)
         {
 
-            EnemyController obj = Instantiate(enemysToPool[index].objectToPool);
+            Enemy obj = Instantiate(enemysToPool[index].objectToPool);
             obj.gameObject.SetActive(false);
             obj.transform.parent = this.transform;
             pooledEnemysList[index].Add(obj);
@@ -70,10 +70,10 @@ public class EnemyPoolManager : MonoSingleton<EnemyPoolManager>
     {
         ObjectPoolEnemy item = enemysToPool[index];
 
-        pooledEnemys = new List<EnemyController>();
+        pooledEnemys = new List<Enemy>();
         for (int i = 0; i < item.amountToPool; i++)
         {
-            EnemyController obj = Instantiate(item.objectToPool);
+            Enemy obj = Instantiate(item.objectToPool);
             obj.gameObject.SetActive(false);
             obj.transform.parent = this.transform;
             pooledEnemys.Add(obj);

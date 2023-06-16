@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class Porte : MonoBehaviour
+public class Door : MonoBehaviour
 {
     [SerializeField] int doorPrice;
     [SerializeField] TextMeshPro priceText;
@@ -17,7 +17,7 @@ public class Porte : MonoBehaviour
     [SerializeField] List<Transform> placeHolderSpawnEnemies;
 
     [SerializeField] bool isNextRoomHaveSeveralsEntry;
-    [SerializeField] List<Porte> otherDoorInNextRoom;
+    [SerializeField] List<Door> otherDoorInNextRoom;
 
     private bool isPay = false;
 
@@ -79,7 +79,7 @@ public class Porte : MonoBehaviour
             }
             if (isNextRoomHaveSeveralsEntry)
             {
-                foreach(Porte porte in otherDoorInNextRoom)
+                foreach(Door porte in otherDoorInNextRoom)
                 {
                     porte.ClearListSpawnPoint();
                 }

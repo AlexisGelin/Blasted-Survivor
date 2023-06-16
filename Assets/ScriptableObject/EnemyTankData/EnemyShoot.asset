@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b6c247ce5431e140929953d3ed2516d, type: 3}
-  m_Name: EnemyStarter
+  m_Name: EnemyShoot
   m_EditorClassIdentifier: 
   Name: Starter
-  Health: 50
-  BodyDamage: 10
+  Health: 30
+  BodyDamage: 5
   ExpOnDestroy: 5
-  FireRate: 0.5
+  FireRate: 1.5
   Speed: 2
   HealthRegeneration: 0
   Bullet:
-    Damage: 25
-    Penetration: 2
+    Damage: 12
+    Penetration: 1
     BulletSize: 1
-    Speed: 5
-  Renderer: {fileID: 3582898628122688570, guid: b0c856194fcf1f349837bba13caf1ec3, type: 3}
+    Speed: 2
+  Renderer: {fileID: 3582898628122688570, guid: 074ea4752faec4e49ab11e3d1f050346, type: 3}

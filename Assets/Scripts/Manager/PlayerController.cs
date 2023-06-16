@@ -11,7 +11,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     public Vector3 PlayerVelocity;
 
     [SerializeField] TankData _data, _upgradeData;
-    [SerializeField] Rigidbody2D _rb;
+    [SerializeField] public Rigidbody2D Rb;
     [SerializeField] Transform _renderer;
 
     TankRenderer _tankRenderer;
@@ -118,7 +118,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
         PlayerVelocity = (moveDirection * (_data.Speed + _upgradeData.Speed));
 
-        _rb.MovePosition(transform.position + PlayerVelocity * Time.fixedDeltaTime);
+        Rb.MovePosition(transform.position + PlayerVelocity * Time.fixedDeltaTime);
     }
 
     #region Movement/Rotation/Regen
@@ -376,7 +376,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
         foreach (var sprite in _tankRenderer.Sprite) sprite.DOFade(0, .5f);
 
 
-        _rb.simulated = false;
+        Rb.simulated = false;
 
         yield return new WaitForSeconds(.3f);
 
@@ -401,9 +401,9 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
         }
 
-        if (collision.gameObject.GetComponent<EnemyController>() != null)
+        if (collision.gameObject.GetComponent<Enemy>() != null)
         {
-            var enemy = collision.gameObject.GetComponent<EnemyController>();
+            var enemy = collision.gameObject.GetComponent<Enemy>();
             TakeDamage(enemy.GetBodyDamage);
         }
     }
