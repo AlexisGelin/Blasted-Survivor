@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] SpriteRenderer _bulletFace, _bulletFade;
     [SerializeField] TrailRenderer _trailRenderer;
     [SerializeField] GameObject _onHitFX, _circleFX;
+    [SerializeField] CircleCollider2D _circleCollider;
 
     BulletData _data, _upgradeData;
     Coroutine _disableBullet;
@@ -32,7 +33,7 @@ public class Bullet : MonoBehaviour
         _rb.velocity = _direction * (_data.Speed + _upgradeData.Speed) + (PlayerController.Instance.PlayerVelocity / 10);
         _rb.simulated = true;
 
-        transform.localScale = new Vector3(data.BulletSize, data.BulletSize, data.BulletSize);
+        UpdateSize(_data.BulletSize);
 
         _trailRenderer.Clear();
         _trailRendererBoing.Kill();
@@ -43,6 +44,19 @@ public class Bullet : MonoBehaviour
         _bulletFace.DOFade(1, 0);
 
         _disableBullet = StartCoroutine(DisableBullet());
+    }
+
+    void UpdateSize(float newBulletSize)
+    {
+        transform.localScale = Vector3.one;
+
+        _circleFX.transform.localScale = new Vector3(newBulletSize, newBulletSize, newBulletSize);
+        _trailRenderer.transform.localScale = new Vector3(newBulletSize, newBulletSize, newBulletSize);
+
+        _bulletFace.transform.localScale = new Vector3(newBulletSize, newBulletSize, newBulletSize);
+        _bulletFade.transform.localScale = new Vector3(newBulletSize + 0.05f, newBulletSize + 0.05f, newBulletSize + 0.05f);
+
+        _circleCollider.radius = newBulletSize / 2;
     }
 
     IEnumerator DisableBullet()
@@ -62,6 +76,9 @@ public class Bullet : MonoBehaviour
         yield return new WaitForSeconds(.3f);
 
         gameObject.SetActive(false);
+
+        UpdateSize(_data.BulletSize);
+
     }
 
     public void Collision()

@@ -15,13 +15,13 @@ MonoBehaviour:
   Name: DoubleShot
   Health: 2
   BodyDamage: 60
-  Speed: 2
   ExpOnDestroy: 1
   FireRate: 0.2
+  Speed: 2
   HealthRegeneration: 1
   Bullet:
     Damage: 25
     Penetration: 2
+    BulletSize: 0.15
     Speed: 5
-    BulletSize: 1.25
   Renderer: {fileID: 5386375848742198481, guid: ab468775606e7784f9f8373058624e78, type: 3}

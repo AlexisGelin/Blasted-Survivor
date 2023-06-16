@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b6c247ce5431e140929953d3ed2516d, type: 3}
-  m_Name: QuadraShot
+  m_Name: DualDoubleShot
   m_EditorClassIdentifier: 
-  Name: QuadraShot
+  Name: DualDoubleShot
   Health: 2
-  BodyDamage: 75
+  BodyDamage: 60
   ExpOnDestroy: 1
-  FireRate: 0.1
+  FireRate: 0.2
   Speed: 2
   HealthRegeneration: 1
   Bullet:
@@ -24,4 +24,4 @@ MonoBehaviour:
     Penetration: 2
     BulletSize: 0.15
     Speed: 5
-  Renderer: {fileID: 3582898628122688570, guid: 524f0441014484b41b04a9630ae47c8d, type: 3}
+  Renderer: {fileID: 3582898628122688570, guid: 642bd0e90a171564c9a8e89eab33ab20, type: 3}

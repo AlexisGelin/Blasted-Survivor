@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 710153845814814757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3034860985662891866}
@@ -83,7 +83,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.15
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -275,7 +275,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.5
 --- !u!50 &7152765582376047678
 Rigidbody2D:
   serializedVersion: 4
@@ -315,6 +315,7 @@ MonoBehaviour:
   _trailRenderer: {fileID: 4361688436140838827}
   _onHitFX: {fileID: 3354546749325050734, guid: 66b6c1bc6f17aba46b8b3074d3102b91, type: 3}
   _circleFX: {fileID: 3217243871911755587, guid: 847a55fb26594694badad67a623cd6a8, type: 3}
+  _circleCollider: {fileID: 3034860985662891861}
 --- !u!1 &3034860985780814630
 GameObject:
   m_ObjectHideFlags: 0

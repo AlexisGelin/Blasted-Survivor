@@ -161,6 +161,8 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
     private void Fire()
     {
+        if (_tankRenderer._canonTransforms.Count == 0) return;
+
         if (Time.time > _nextFire)
         {
             _nextFire = Time.time + _data.FireRate - _upgradeData.FireRate;
