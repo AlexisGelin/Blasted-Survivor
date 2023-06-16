@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class EnemyController : MonoBehaviour, IHealth
 {
     [SerializeField] TankData _data;
     [SerializeField] int _health;
+    [SerializeField] int coinGain;
 
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] Transform _canonTransform;
@@ -15,6 +17,8 @@ public class EnemyController : MonoBehaviour, IHealth
 
     Sequence _damageColorTweek;
     List<Sequence> _damageColorTweeks = new List<Sequence>();
+
+    public AIPath aIPath;
 
     public Rigidbody2D Rb { get => _rb; }
     public TankData Data { get => _data; }
@@ -29,6 +33,7 @@ public class EnemyController : MonoBehaviour, IHealth
         transform.localScale = Vector3.one;
         foreach (var sprite in _sprites) sprite.DOFade(1, 0);
 
+        StartCoroutine(mooveEnemy());
     }
 
     public bool TakeDamage(int amount)
@@ -84,6 +89,18 @@ public class EnemyController : MonoBehaviour, IHealth
     public void TakeHeal(int amount)
     {
         throw new System.NotImplementedException();
+    }
+
+    IEnumerator mooveEnemy()
+    {
+        while (_health > 0)
+        {
+            aIPath.destination = PlayerController.Instance.transform.position;
+            Vector2 direction = PlayerController.Instance.transform.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
 }

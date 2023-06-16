@@ -107,7 +107,7 @@ public class Bullet : MonoBehaviour
             Collision();
         }
 
-        if (collision.gameObject.layer == 30)
+        if (collision.gameObject.layer == 30 || collision.gameObject.layer == 31)
         {
             DOTween.Sequence()
                 .Join(circle.transform.DOPunchScale(new Vector3(.1f, .1f, .1f), .1f))

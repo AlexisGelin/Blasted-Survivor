@@ -16,6 +16,7 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     private int currentIndexOfWaves;
     EnemyController enemyControllerToSpawn;
+    int baseOfNumberOfEnemyRemaining;
 
     public int CurrentIndexOfWaves { get => currentIndexOfWaves; }
 
@@ -72,11 +73,12 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     IEnumerator SpawnEnemys()
     {
-        for (int i = 0; i < numberOfEnemyRemaining; i++)
+        baseOfNumberOfEnemyRemaining = numberOfEnemyRemaining;
+        for (int i = 0; i < baseOfNumberOfEnemyRemaining; i++)
         {
             enemyControllerToSpawn = EnemyPoolManager.Instance.GetPooledEnemy(0);
-            enemyControllerToSpawn.Init();
             enemyControllerToSpawn.gameObject.SetActive(true);
+            enemyControllerToSpawn.Init();
             enemyControllerToSpawn.transform.position = SpawnPointEnemyManager.Instance.searchBestSpawnPoint().position;
             yield return new WaitForSeconds(timerForEachSpawnEnemy);
         }
