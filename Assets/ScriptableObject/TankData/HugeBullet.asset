@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: HugeBullet
   m_EditorClassIdentifier: 
   Name: HugeBullet
-  Health: 2
-  BodyDamage: 75
+  Health: 250
+  BodyDamage: 100
   ExpOnDestroy: 1
-  FireRate: 1
+  FireRate: 2
   Speed: 1
   HealthRegeneration: 1
   Bullet:
-    Damage: 50
-    Penetration: 5
+    Damage: 400
+    Penetration: 1
     BulletSize: 0.375
-    Speed: 2.5
+    Speed: 2
   Renderer: {fileID: 5386375848742198481, guid: 8c7c3d8333af0814e82720c419091e56, type: 3}

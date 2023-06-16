@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Sniper
   m_EditorClassIdentifier: 
   Name: Sniper
-  Health: 50
-  BodyDamage: 75
+  Health: 65
+  BodyDamage: 25
   ExpOnDestroy: 1
   FireRate: 1
   Speed: 2
   HealthRegeneration: 1
   Bullet:
-    Damage: 50
-    Penetration: 5
+    Damage: 100
+    Penetration: 3
     BulletSize: 0.15
     Speed: 10
   Renderer: {fileID: 5386375848742198481, guid: 9b0522de992ded9438d19a900453f4a8, type: 3}

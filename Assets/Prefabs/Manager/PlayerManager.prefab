@@ -44,15 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbca328715ae386438cba0a38f606c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _level: 0
-  _exp: 0
   _coin: 0
+  _totalEnemyKilled: 0
   _name: 
-  healthRegenerationUpdate: 0.5
-  healthUpdate: 20
-  bodyDamageUpgrade: 10
-  bulletSpeedUpgrade: 1
+  healthRegenerationUpdate: 0.25
+  healthUpdate: 25
+  bodyDamageUpgrade: 25
+  bulletSpeedUpgrade: 0.5
   bulletPenetrationUpdate: 1
-  bulletDamageUpdate: 20
+  bulletDamageUpdate: 25
   bulletFireRateUpdate: 0.04
-  speedUpdate: 0.5
+  speedUpdate: 0.25

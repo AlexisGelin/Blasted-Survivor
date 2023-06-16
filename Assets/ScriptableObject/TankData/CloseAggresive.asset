@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: CloseAggresive
   m_EditorClassIdentifier: 
   Name: CloseAggresive
-  Health: 400
+  Health: 300
   BodyDamage: 500
   ExpOnDestroy: 5
-  FireRate: 0.1
-  Speed: 5
-  HealthRegeneration: 0
+  FireRate: 0
+  Speed: 4
+  HealthRegeneration: 3
   Bullet:
-    Damage: 25
-    Penetration: 2
-    BulletSize: 0.15
-    Speed: 5
+    Damage: 0
+    Penetration: 0
+    BulletSize: 0
+    Speed: 0
   Renderer: {fileID: 3582898628122688570, guid: 7b676449f8c2a9644adf4b7d0c85b3ee, type: 3}

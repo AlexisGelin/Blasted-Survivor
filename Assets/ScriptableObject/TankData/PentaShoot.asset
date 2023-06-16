@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: PentaShoot
   m_EditorClassIdentifier: 
   Name: PentaShoot
-  Health: 2
+  Health: 125
   BodyDamage: 75
   ExpOnDestroy: 1
-  FireRate: 0.1
+  FireRate: 0.5
   Speed: 2
   HealthRegeneration: 1
   Bullet:
     Damage: 25
-    Penetration: 2
+    Penetration: 1
     BulletSize: 0.15
     Speed: 5
   Renderer: {fileID: 3582898628122688570, guid: f39e81ab70cf01f4eadaa41c901bdf36, type: 3}

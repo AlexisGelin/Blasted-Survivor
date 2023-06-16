@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: ClosePlus
   m_EditorClassIdentifier: 
   Name: ClosePlus
-  Health: 500
-  BodyDamage: 200
+  Health: 600
+  BodyDamage: 300
   ExpOnDestroy: 5
-  FireRate: 0.1
-  Speed: 2
-  HealthRegeneration: 0
+  FireRate: 0
+  Speed: 4
+  HealthRegeneration: 3
   Bullet:
-    Damage: 25
-    Penetration: 2
-    BulletSize: 0.15
-    Speed: 5
+    Damage: 0
+    Penetration: 0
+    BulletSize: 0
+    Speed: 0
   Renderer: {fileID: 3582898628122688570, guid: 04160e7e169eb164484f12594ab3579a, type: 3}

@@ -16,12 +16,12 @@ MonoBehaviour:
   Health: 100
   BodyDamage: 75
   ExpOnDestroy: 1
-  FireRate: 0.1
+  FireRate: 0.5
   Speed: 2
   HealthRegeneration: 1
   Bullet:
     Damage: 25
-    Penetration: 2
+    Penetration: 1
     BulletSize: 0.15
     Speed: 5
   Renderer: {fileID: 3582898628122688570, guid: 69662124c0977ca479a99c17a410d3a0, type: 3}

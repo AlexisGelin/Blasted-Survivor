@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: BigBullet
   m_EditorClassIdentifier: 
   Name: BigBullet
-  Health: 2
+  Health: 200
   BodyDamage: 75
   ExpOnDestroy: 1
-  FireRate: 1
-  Speed: 1
+  FireRate: 1.5
+  Speed: 1.5
   HealthRegeneration: 1
   Bullet:
-    Damage: 50
-    Penetration: 5
+    Damage: 200
+    Penetration: 1
     BulletSize: 0.3
     Speed: 2.5
   Renderer: {fileID: 5386375848742198481, guid: 214c98864bc723f4780774a15dc0722b, type: 3}

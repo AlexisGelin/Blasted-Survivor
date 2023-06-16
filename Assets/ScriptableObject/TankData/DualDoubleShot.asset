@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: DualDoubleShot
   m_EditorClassIdentifier: 
   Name: DualDoubleShot
-  Health: 2
-  BodyDamage: 60
+  Health: 150
+  BodyDamage: 100
   ExpOnDestroy: 1
-  FireRate: 0.2
+  FireRate: 0.5
   Speed: 2
   HealthRegeneration: 1
   Bullet:
     Damage: 25
-    Penetration: 2
+    Penetration: 1
     BulletSize: 0.15
     Speed: 5
   Renderer: {fileID: 3582898628122688570, guid: 642bd0e90a171564c9a8e89eab33ab20, type: 3}

@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: OctoShoot
   m_EditorClassIdentifier: 
   Name: OctoShoot
-  Health: 2
-  BodyDamage: 75
+  Health: 250
+  BodyDamage: 150
   ExpOnDestroy: 1
-  FireRate: 0.1
+  FireRate: 0.5
   Speed: 2
   HealthRegeneration: 1
   Bullet:
     Damage: 25
-    Penetration: 2
+    Penetration: 1
     BulletSize: 0.15
     Speed: 5
   Renderer: {fileID: 3582898628122688570, guid: d28f23111884444448cc1a52eae4d58d, type: 3}

@@ -86,6 +86,9 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
             Destroy(_tankRenderer.gameObject);
         }
 
+
+
+
         var tempRenderer = Instantiate(_data.Renderer.Renderer, _renderer);
         _tankRenderer = tempRenderer.GetComponent<TankRenderer>();
 
@@ -98,6 +101,9 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
         _maxHealth = _data.Health + _upgradeData.Health;
         _health = _data.Health + _upgradeData.Health;
+
+        UIManager.Instance.GameView.InitHealthBar();
+        UIManager.Instance.GameView.UpdateHealthBar();
     }
 
     private void Update()
