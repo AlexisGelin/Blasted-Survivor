@@ -45,6 +45,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tankDatas:
-  - {fileID: 11400000, guid: 6bc315c26bb80074e8be1f68cb5f7486, type: 2}
+  - {fileID: 11400000, guid: 54d0edf50b0cc584d86e8a1f326e1303, type: 2}
+  - {fileID: 11400000, guid: 7e9d6a543d717dc458fd6b4226b70bcc, type: 2}
+  - {fileID: 11400000, guid: 78ccdd3b6ee317c43ad286879c1f96c3, type: 2}
+  - {fileID: 11400000, guid: f59f50491ba962a46939c73f70f1aeb4, type: 2}
   - {fileID: 11400000, guid: d14520c1f78500444a730f8ac49a3ec0, type: 2}
+  - {fileID: 11400000, guid: 7864824c8b7fdc94a9b03a8826cc21da, type: 2}
+  - {fileID: 11400000, guid: 278fd8222956a6647ab976b28c4ac773, type: 2}
+  - {fileID: 11400000, guid: 352c1e25cd820514a8f9ee1f8d0d2a33, type: 2}
+  - {fileID: 11400000, guid: cd94c1828b8451a47a9f98ba971f08ef, type: 2}
   - {fileID: 11400000, guid: 3024373a235a4094680e39b58ea55eb0, type: 2}
+  - {fileID: 11400000, guid: cf11ea5fbc114394abe74582dafd38d0, type: 2}
+  - {fileID: 11400000, guid: 6bc315c26bb80074e8be1f68cb5f7486, type: 2}
+  - {fileID: 11400000, guid: ecdde86872281664b817df057afadf02, type: 2}
+  - {fileID: 11400000, guid: 06ae8b9355bdd1a46a0ff3ff9296a424, type: 2}
+  - {fileID: 11400000, guid: 35e27356ae56ed24e94d1cc5face08a0, type: 2}
+  - {fileID: 11400000, guid: b4e4f85f987dc45479b0aa96fec1c2db, type: 2}

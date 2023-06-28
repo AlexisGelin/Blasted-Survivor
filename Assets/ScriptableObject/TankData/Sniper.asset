@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b6c247ce5431e140929953d3ed2516d, type: 3}
-  m_Name: QuadraShot
+  m_Name: Sniper
   m_EditorClassIdentifier: 
-  Name: QuadraShot
-  Health: 75
-  BodyDamage: 75
+  Name: Sniper
+  Health: 65
+  BodyDamage: 25
   ExpOnDestroy: 1
-  FireRate: 0.5
+  FireRate: 1
   Speed: 2
   HealthRegeneration: 1
   Bullet:
-    Damage: 25
-    Penetration: 1
+    Damage: 100
+    Penetration: 3
     BulletSize: 0.15
-    Speed: 5
-  Renderer: {fileID: 3582898628122688570, guid: 524f0441014484b41b04a9630ae47c8d, type: 3}
+    Speed: 10
+  Renderer: {fileID: 5386375848742198481, guid: 9b0522de992ded9438d19a900453f4a8, type: 3}

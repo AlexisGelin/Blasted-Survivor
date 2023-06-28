@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b6c247ce5431e140929953d3ed2516d, type: 3}
-  m_Name: QuadraShot
+  m_Name: CloseAggresive
   m_EditorClassIdentifier: 
-  Name: QuadraShot
-  Health: 75
-  BodyDamage: 75
-  ExpOnDestroy: 1
-  FireRate: 0.5
-  Speed: 2
-  HealthRegeneration: 1
+  Name: CloseAggresive
+  Health: 300
+  BodyDamage: 500
+  ExpOnDestroy: 5
+  FireRate: 0
+  Speed: 4
+  HealthRegeneration: 3
   Bullet:
-    Damage: 25
-    Penetration: 1
-    BulletSize: 0.15
-    Speed: 5
-  Renderer: {fileID: 3582898628122688570, guid: 524f0441014484b41b04a9630ae47c8d, type: 3}
+    Damage: 0
+    Penetration: 0
+    BulletSize: 0
+    Speed: 0
+  Renderer: {fileID: 3582898628122688570, guid: 7b676449f8c2a9644adf4b7d0c85b3ee, type: 3}
