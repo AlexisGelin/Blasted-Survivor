@@ -58,7 +58,7 @@ public class EnemyShoot : Enemy
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 
-            if (Vector3.Distance(PlayerController.Instance.transform.position, transform.position) <= _rangeEnemy) 
+            if (Vector3.Distance(PlayerController.Instance.transform.position, transform.position) <= _rangeEnemy)
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, PlayerController.Instance.transform.position - transform.position, 1000f, _layerMask);
                 if (hit.collider.gameObject.layer == 10)
@@ -70,7 +70,8 @@ public class EnemyShoot : Enemy
                         if (hit.collider.gameObject.layer != 10)
                         {
                             isFirstShoot = true;
-                        } else
+                        }
+                        else
                         {
                             isFirstShoot = false;
                         }
@@ -115,11 +116,14 @@ public class EnemyShoot : Enemy
                             }
                         }
                     }
-                } else
+                }
+                else
                 {
                     _canMoove = true;
                 }
             }
+            else if (!_canMoove)
+                _canMoove = true;
 
             if (_canMoove)
             {
