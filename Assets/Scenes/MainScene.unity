@@ -28460,6 +28460,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2462774669217252621, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
   m_PrefabInstance: {fileID: 2462774668362860293}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &1562313227 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 2462774669217252622, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
+  m_PrefabInstance: {fileID: 2462774668362860293}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1571108124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4242363715321254080, guid: 3b968a75a74733f429fcd5e4fdc35cd1, type: 3}
@@ -29142,7 +29147,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9149946061553119237, guid: b2dcdf5705c076741b637fb6e7e3e917, type: 3}
       propertyPath: itemsToPool.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9149946061553119237, guid: b2dcdf5705c076741b637fb6e7e3e917, type: 3}
       propertyPath: enemysToPool.Array.size
@@ -29449,6 +29454,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2462774669217252620, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
+      propertyPath: Rb
+      value: 
+      objectReference: {fileID: 1562313227}
     - target: {fileID: 2462774669217252620, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
       propertyPath: speedUpdate
       value: 0.35
