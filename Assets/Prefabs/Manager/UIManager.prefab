@@ -14695,8 +14695,24 @@ MonoBehaviour:
   _bulletDamageButton: {fileID: 8564311152448333118}
   _bulletReloadButton: {fileID: 8564311153501351119}
   _movementSpeedButton: {fileID: 8564311152328290173}
-  buttonsActive: []
-  pointCosts: []
+  buttonsActive:
+  - {fileID: 8564311153456655320}
+  - {fileID: 8564311153291680801}
+  - {fileID: 8564311152870065429}
+  - {fileID: 8564311152436065911}
+  - {fileID: 8564311153144798983}
+  - {fileID: 8564311152448333118}
+  - {fileID: 8564311153501351119}
+  - {fileID: 8564311152328290173}
+  pointCosts:
+  - {fileID: 3889424471102502789}
+  - {fileID: 3215415595323257654}
+  - {fileID: 1618492468834699993}
+  - {fileID: 2016476987758369129}
+  - {fileID: 1618090636836947069}
+  - {fileID: 8987021395000797711}
+  - {fileID: 5566274883983614758}
+  - {fileID: 7203969815645645788}
 --- !u!114 &8564311152843326179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18868,7 +18884,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8564311153582950301}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -18892,7 +18908,7 @@ MonoBehaviour:
   _timerBeforeWaves: {fileID: 5157138890763361767}
   _enemyBar: {fileID: 2443813960810017025}
   _healthBar: {fileID: 6539760921973318346}
-  upgradePointsNeedsForeachLevel: 
+  upgradePointsNeedsForeachLevel: 0100000001000000010000000200000002000000030000000400000000000000
 --- !u!1 &8564311153584848965
 GameObject:
   m_ObjectHideFlags: 0
