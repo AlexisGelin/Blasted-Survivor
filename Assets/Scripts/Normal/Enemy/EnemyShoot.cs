@@ -19,9 +19,10 @@ public class EnemyShoot : Enemy
 
     List<Sequence> _canonSequences = new List<Sequence>();
     List<Vector2> _canonTransforms = new List<Vector2>();
-    public override void Init()
+    Coroutine mooveEnemyAndShoot;
+    public override void Init(int hpToIncrease)
     {
-        base.Init();
+        base.Init(hpToIncrease);
 
         isFirstShoot = true;
         _tankRenderer = _data.Renderer;
@@ -36,7 +37,7 @@ public class EnemyShoot : Enemy
         }
 
         var tempRenderer = Instantiate(_data.Renderer.Renderer, _renderer);
-        _tankRenderer = tempRenderer.GetComponent<TankRenderer>();
+        _tankRenderer = tempRenderer.GetComponent<TankRenderer>(); //Here
 
         _canonTransforms.Clear();
 
@@ -45,7 +46,7 @@ public class EnemyShoot : Enemy
             _canonTransforms.Add(canon.localPosition);
         }
 
-        StartCoroutine(MooveEnemyAndShoot());
+        mooveEnemyAndShoot = StartCoroutine(MooveEnemyAndShoot());
     }
 
     IEnumerator MooveEnemyAndShoot()
@@ -128,15 +129,31 @@ public class EnemyShoot : Enemy
             if (_canMoove)
             {
                 AIPath.destination = PlayerController.Instance.transform.position;
-/*                Vector2 direction = PlayerController.Instance.transform.position - transform.position;
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward)*/;
-            } else
+/*                direction = PlayerController.Instance.transform.position - transform.position;
+                angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);*/
+            }
+            else
             {
                 AIPath.destination = transform.position;
             }
 
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public override IEnumerator ScaleTankAndDisable()
+    {
+        //DOTween.KillAll();
+/*        foreach (Sequence seq in _canonSequences)
+        {
+            seq.Kill();
+        }
+
+        _canonSequences.Clear();
+
+        StopCoroutine(mooveEnemyAndShoot);*/
+
+        return base.ScaleTankAndDisable();
     }
 }

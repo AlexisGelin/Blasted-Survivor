@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyClose : Enemy
 {
-    public override void Init()
+    public override void Init(int hpToIncrease)
     {
-        base.Init();
+        base.Init(hpToIncrease);
         StartCoroutine(MooveEnemyClose());
     }
    

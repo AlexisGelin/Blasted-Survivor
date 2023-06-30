@@ -22,6 +22,6 @@ MonoBehaviour:
   Bullet:
     Damage: 12
     Penetration: 1
-    BulletSize: 1
+    BulletSize: 1.5
     Speed: 2
   Renderer: {fileID: 3582898628122688570, guid: 074ea4752faec4e49ab11e3d1f050346, type: 3}

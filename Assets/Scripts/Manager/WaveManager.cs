@@ -20,7 +20,10 @@ public class WaveManager : MonoSingleton<WaveManager>
     Enemy _enemyControllerToSpawn;
     int _baseOfNumberOfEnemyRemaining;
 
-    public int CurrentIndexOfWaves { get => _currentIndexOfWaves; }
+    public int CurrentIndexOfWaves;
+
+    int totalHealthAdd;
+
 
     public void Init()
     {
@@ -30,7 +33,6 @@ public class WaveManager : MonoSingleton<WaveManager>
     public void EnnemyDie()
     {
         NumberOfEnemyRemaining--;
-       // Debug.Log(NumberOfEnemyRemaining);
         if (NumberOfEnemyRemaining <= 0)
         {
             NumberOfEnemyRemaining = 0;
@@ -63,10 +65,12 @@ public class WaveManager : MonoSingleton<WaveManager>
     IEnumerator StartNewWave()
     {
         _currentIndexOfWaves++;
+        CurrentIndexOfWaves++;
         if (_currentIndexOfWaves >= _waves.Count)
         {
             _currentIndexOfWaves = 0;
         }
+        totalHealthAdd += _waves[_currentIndexOfWaves].enemyHealthToAdd;
         yield return new WaitForSeconds(_delayBetweenWave);
         _numberOfEnemyRemainingBase += _waves[_currentIndexOfWaves].enemyToAdd;
         NumberOfEnemyRemaining = _numberOfEnemyRemainingBase;
@@ -87,7 +91,7 @@ public class WaveManager : MonoSingleton<WaveManager>
                 _enemyControllerToSpawn = EnemyPoolManager.Instance.GetPooledEnemy(0);
 
             _enemyControllerToSpawn.gameObject.SetActive(true);
-            _enemyControllerToSpawn.Init();
+            _enemyControllerToSpawn.Init(totalHealthAdd);
             _enemyControllerToSpawn.transform.position = SpawnPointEnemyManager.Instance.searchBestSpawnPoint().position;
             yield return new WaitForSeconds(_timerForEachSpawnEnemy);
         }
