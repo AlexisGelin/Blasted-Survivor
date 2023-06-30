@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour, IHealth
         return false;
     }
 
-    IEnumerator ScaleTankAndDisable()
+    public virtual IEnumerator ScaleTankAndDisable()
     {
         transform.DOScale(new Vector3(2, 2, 2), .5f);
 

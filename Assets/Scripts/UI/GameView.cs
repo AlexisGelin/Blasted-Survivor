@@ -9,6 +9,8 @@ public class GameView : View
     public UpgradePopup UpgradePopup;
     [SerializeField] TMP_Text _playerName, _coins, _waves, _timerBeforeWaves;
     [SerializeField] SliderBar _enemyBar, _healthBar;
+    public List<int> UpgradePointsNeedsForeachLevel { get => upgradePointsNeedsForeachLevel; }
+    [SerializeField] List<int> upgradePointsNeedsForeachLevel;
 
     RectTransform upgradePopUpRT;
 
@@ -74,43 +76,81 @@ public class GameView : View
 
     public void HandleUpgradeHealthRegen()
     {
-        PlayerController.Instance.Upgrade("HealthRegeneration");
-        UsePoint();
+        if (PlayerController.Instance.UpgradePoint >= upgradePointsNeedsForeachLevel[PlayerController.Instance._healthRegenLevel])
+        {
+            UsePoint(upgradePointsNeedsForeachLevel[PlayerController.Instance._healthRegenLevel]);
+            PlayerController.Instance.Upgrade("HealthRegeneration");
+        }
     }
     public void HandleUpgradeHealth()
     {
-        PlayerController.Instance.Upgrade("Health");
-        UsePoint();
+        if (PlayerController.Instance.UpgradePoint
+            >=
+            upgradePointsNeedsForeachLevel[PlayerController.Instance._healthLevel])
+        {
+            UsePoint(upgradePointsNeedsForeachLevel[PlayerController.Instance._healthLevel]);
+            PlayerController.Instance.Upgrade("Health");
+        }
     }
     public void HandleUpgradeBodyDamage()
     {
-        PlayerController.Instance.Upgrade("BodyDamage");
-        UsePoint();
+        if (PlayerController.Instance.UpgradePoint
+            >=
+            upgradePointsNeedsForeachLevel[PlayerController.Instance._bodyDamageLevel])
+        {
+            UsePoint(upgradePointsNeedsForeachLevel[PlayerController.Instance._bodyDamageLevel]);
+            PlayerController.Instance.Upgrade("BodyDamage");
+        }
     }
     public void HandleUpgradeBulletSpeed()
     {
-        PlayerController.Instance.Upgrade("BulletSpeed");
-        UsePoint();
+        if (PlayerController.Instance.UpgradePoint
+            >=
+            upgradePointsNeedsForeachLevel[PlayerController.Instance._bulletSpeedLevel])
+        {
+            UsePoint(upgradePointsNeedsForeachLevel[PlayerController.Instance._bulletSpeedLevel]);
+            PlayerController.Instance.Upgrade("BulletSpeed");
+        }
     }
     public void HandleUpgradeBulletPenetration()
     {
-        PlayerController.Instance.Upgrade("BulletPenetration");
-        UsePoint();
+        if (PlayerController.Instance.UpgradePoint
+            >=
+            upgradePointsNeedsForeachLevel[PlayerController.Instance._bulletPenetrationLevel])
+        {
+            UsePoint(upgradePointsNeedsForeachLevel[PlayerController.Instance._bulletPenetrationLevel]);
+            PlayerController.Instance.Upgrade("BulletPenetration");
+        }
     }
     public void HandleUpgradeBulletDamage()
     {
-        PlayerController.Instance.Upgrade("BulletDamage");
-        UsePoint();
+        if (PlayerController.Instance.UpgradePoint
+            >=
+            upgradePointsNeedsForeachLevel[PlayerController.Instance._bulletDamageLevel])
+        {
+            UsePoint(upgradePointsNeedsForeachLevel[PlayerController.Instance._bulletDamageLevel]);
+            PlayerController.Instance.Upgrade("BulletDamage");
+        }
     }
     public void HandleUpgradeBulletReload()
     {
-        PlayerController.Instance.Upgrade("FireRate");
-        UsePoint();
+        if (PlayerController.Instance.UpgradePoint
+            >=
+            upgradePointsNeedsForeachLevel[PlayerController.Instance._bulletReloadLevel])
+        {
+            UsePoint(upgradePointsNeedsForeachLevel[PlayerController.Instance._bulletReloadLevel]);
+            PlayerController.Instance.Upgrade("FireRate");
+        }
     }
     public void HandleUpgradeMovementSpeed()
     {
-        PlayerController.Instance.Upgrade("Speed");
-        UsePoint();
+        if (PlayerController.Instance.UpgradePoint
+            >=
+            upgradePointsNeedsForeachLevel[PlayerController.Instance._movementSpeedLevel])
+        {
+            UsePoint(upgradePointsNeedsForeachLevel[PlayerController.Instance._movementSpeedLevel]);
+            PlayerController.Instance.Upgrade("Speed");
+        }
     }
     public void AddPoint(int amount)
     {
@@ -118,11 +158,12 @@ public class GameView : View
         UpgradePopup.ActiveAllButton();
         UpgradePopup.SetPoint();
         OpenUpgrades();
+
     }
 
-    public void UsePoint()
+    public void UsePoint(int pointUse = 1)
     {
-        PlayerController.Instance.UpgradePoint--;
+        PlayerController.Instance.UpgradePoint -= pointUse;
         UpgradePopup.SetPoint();
         if (PlayerController.Instance.UpgradePoint <= 0) StartCoroutine(CloseUpgradePopUp());
     }

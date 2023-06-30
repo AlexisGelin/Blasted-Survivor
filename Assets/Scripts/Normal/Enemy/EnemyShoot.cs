@@ -139,4 +139,11 @@ public class EnemyShoot : Enemy
             yield return new WaitForEndOfFrame();
         }
     }
+
+    public override IEnumerator ScaleTankAndDisable()
+    {
+        //DOTween.KillAll();
+
+        return base.ScaleTankAndDisable();
+    }
 }

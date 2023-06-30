@@ -14,6 +14,8 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
     [SerializeField] public Rigidbody2D Rb;
     [SerializeField] Transform _renderer;
 
+    public int _healthRegenLevel, _healthLevel, _bodyDamageLevel, _bulletSpeedLevel, _bulletPenetrationLevel, _bulletDamageLevel, _bulletReloadLevel, _movementSpeedLevel, _upgradePoint;
+    
     TankRenderer _tankRenderer;
     Bullet _bullet;
     PlayerInput _playerInput;
@@ -30,7 +32,6 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
     Coroutine _playerRegenCoroutine;
 
-    int _healthRegenLevel, _healthLevel, _bodyDamageLevel, _bulletSpeedLevel, _bulletPenetrationLevel, _bulletDamageLevel, _bulletReloadLevel, _movementSpeedLevel, _upgradePoint;
     const int MAX_LEVEL_UPGRADE = 7;
 
     List<Sequence> _canonSequences = new List<Sequence>();
@@ -234,7 +235,8 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
                 _healthRegenLevel++;
 
-                UIManager.Instance.GameView.UpgradePopup.UpdateHealthRegen(_healthRegenLevel);
+                UIManager.Instance.GameView.UpgradePopup.UpdateHealthRegen(_healthRegenLevel, MAX_LEVEL_UPGRADE);
+
                 break;
             case "Health": // Fait
                 if (_healthLevel >= MAX_LEVEL_UPGRADE) return;
@@ -246,7 +248,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
                 UIManager.Instance.GameView.InitHealthBar();
 
-                UIManager.Instance.GameView.UpgradePopup.UpdateMaxHealth(_healthLevel);
+                UIManager.Instance.GameView.UpgradePopup.UpdateMaxHealth(_healthLevel, MAX_LEVEL_UPGRADE);
                 break;
             case "BodyDamage": // Fait
                 if (_bodyDamageLevel >= MAX_LEVEL_UPGRADE) return;
@@ -255,7 +257,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
                 _bodyDamageLevel++;
 
-                UIManager.Instance.GameView.UpgradePopup.UpdateBodyDamage(_bodyDamageLevel);
+                UIManager.Instance.GameView.UpgradePopup.UpdateBodyDamage(_bodyDamageLevel, MAX_LEVEL_UPGRADE);
                 break;
             case "BulletSpeed": // fait
                 if (_bulletSpeedLevel >= MAX_LEVEL_UPGRADE) return;
@@ -264,7 +266,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
                 _bulletSpeedLevel++;
 
-                UIManager.Instance.GameView.UpgradePopup.UpdateBulletSpeed(_bulletSpeedLevel);
+                UIManager.Instance.GameView.UpgradePopup.UpdateBulletSpeed(_bulletSpeedLevel, MAX_LEVEL_UPGRADE);
                 break;
             case "BulletPenetration": // fait
                 if (_bulletPenetrationLevel >= MAX_LEVEL_UPGRADE) return;
@@ -273,7 +275,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
                 _bulletPenetrationLevel++;
 
-                UIManager.Instance.GameView.UpgradePopup.UpdateBulletPenetration(_bulletPenetrationLevel);
+                UIManager.Instance.GameView.UpgradePopup.UpdateBulletPenetration(_bulletPenetrationLevel, MAX_LEVEL_UPGRADE);
                 break;
             case "BulletDamage": // fait
                 if (_bulletDamageLevel >= MAX_LEVEL_UPGRADE) return;
@@ -282,7 +284,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
                 _bulletDamageLevel++;
 
-                UIManager.Instance.GameView.UpgradePopup.UpdateBulletDamage(_bulletDamageLevel);
+                UIManager.Instance.GameView.UpgradePopup.UpdateBulletDamage(_bulletDamageLevel, MAX_LEVEL_UPGRADE);
                 break;
             case "FireRate": // fait
                 if (_bulletReloadLevel >= MAX_LEVEL_UPGRADE) return;
@@ -291,7 +293,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
                 _bulletReloadLevel++;
 
-                UIManager.Instance.GameView.UpgradePopup.UpdateBulletReload(_bulletReloadLevel);
+                UIManager.Instance.GameView.UpgradePopup.UpdateBulletReload(_bulletReloadLevel, MAX_LEVEL_UPGRADE);
                 break;
             case "Speed": // fait
                 if (_movementSpeedLevel >= MAX_LEVEL_UPGRADE) return;
@@ -300,7 +302,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
                 _movementSpeedLevel++;
 
-                UIManager.Instance.GameView.UpgradePopup.UpdateMovementSpeed(_movementSpeedLevel);
+                UIManager.Instance.GameView.UpgradePopup.UpdateMovementSpeed(_movementSpeedLevel, MAX_LEVEL_UPGRADE);
                 break;
         }
     }

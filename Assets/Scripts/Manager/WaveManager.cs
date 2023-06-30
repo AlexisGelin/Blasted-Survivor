@@ -20,7 +20,8 @@ public class WaveManager : MonoSingleton<WaveManager>
     Enemy _enemyControllerToSpawn;
     int _baseOfNumberOfEnemyRemaining;
 
-    public int CurrentIndexOfWaves { get => _currentIndexOfWaves; }
+    public int CurrentIndexOfWaves;
+
 
     public void Init()
     {
@@ -30,7 +31,6 @@ public class WaveManager : MonoSingleton<WaveManager>
     public void EnnemyDie()
     {
         NumberOfEnemyRemaining--;
-       // Debug.Log(NumberOfEnemyRemaining);
         if (NumberOfEnemyRemaining <= 0)
         {
             NumberOfEnemyRemaining = 0;
@@ -63,6 +63,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     IEnumerator StartNewWave()
     {
         _currentIndexOfWaves++;
+        CurrentIndexOfWaves++;
         if (_currentIndexOfWaves >= _waves.Count)
         {
             _currentIndexOfWaves = 0;
