@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Health: 0
-  HealthRegeneration: 0
   BodyDamage: 0
-  Speed: 0
+  ExpOnDestroy: 0
   FireRate: 0
+  Speed: 0
+  HealthRegeneration: 0
   Bullet:
     Damage: 0
     Penetration: 0
+    BulletSize: 0
     Speed: 0
   Renderer: {fileID: 0}

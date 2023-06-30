@@ -25,11 +25,11 @@ public class Enemy : MonoBehaviour, IHealth
     public TankData Data { get => _data; }
     public int GetBodyDamage { get => _data.BodyDamage; }
 
-    public virtual void Init()
+    public virtual void Init(int hpToIncrease)
     {
         _isDead = false;
 
-        _health = _data.Health;
+        _health = _data.Health + hpToIncrease;
 
         _rb.simulated = true;
 
