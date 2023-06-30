@@ -25,7 +25,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         Time.timeScale = 1;
 
-        DOTween.SetTweensCapacity(2000,200);
+        DOTween.SetTweensCapacity(2000,500);
 
         AudioManager.Instance.Init();
 
