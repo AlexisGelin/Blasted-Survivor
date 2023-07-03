@@ -28665,11 +28665,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2462774669217252621, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
   m_PrefabInstance: {fileID: 2462774668362860293}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &1562313227 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 2462774669217252622, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
-  m_PrefabInstance: {fileID: 2462774668362860293}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1571108124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4242363715321254080, guid: 3b968a75a74733f429fcd5e4fdc35cd1, type: 3}
@@ -28767,18 +28762,6 @@ PrefabInstance:
     - target: {fileID: 7244759591548067044, guid: 5dde972e41ddeeb49a2d43cac995528a, type: 3}
       propertyPath: m_Name
       value: PlayerManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244759591548067046, guid: 5dde972e41ddeeb49a2d43cac995528a, type: 3}
-      propertyPath: bulletDamageUpdate
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244759591548067046, guid: 5dde972e41ddeeb49a2d43cac995528a, type: 3}
-      propertyPath: bulletSpeedUpgrade
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244759591548067046, guid: 5dde972e41ddeeb49a2d43cac995528a, type: 3}
-      propertyPath: bulletFireRateUpdate
-      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7244759591548067047, guid: 5dde972e41ddeeb49a2d43cac995528a, type: 3}
       propertyPath: m_RootOrder
@@ -28966,58 +28949,6 @@ PrefabInstance:
     - target: {fileID: 4433074917229995538, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
       propertyPath: m_Name
       value: WaveManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[2].enemyHealthToAdd
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[3].enemyHealthToAdd
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[4].enemyHealthToAdd
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[5].enemyHealthToAdd
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[6].enemyHealthToAdd
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[7].enemyHealthToAdd
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[8].enemyHealthToAdd
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[9].enemyHealthToAdd
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[10].enemyHealthToAdd
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[11].enemyHealthToAdd
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[12].enemyHealthToAdd
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[13].enemyHealthToAdd
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433074917229995540, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
-      propertyPath: _waves.Array.data[14].enemyHealthToAdd
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4433074917229995541, guid: dae8516314c953b4790a0cd61eef6dd1, type: 3}
       propertyPath: m_RootOrder
@@ -29702,28 +29633,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 401715625}
     m_Modifications:
     - target: {fileID: 2462774669217252610, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-    - target: {fileID: 2462774669217252610, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2462774669217252620, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
-      propertyPath: Rb
-      value: 
-      objectReference: {fileID: 1562313227}
-    - target: {fileID: 2462774669217252620, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
-      propertyPath: speedUpdate
-      value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 2462774669217252620, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
-      propertyPath: bulletDamageUpdate
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2462774669217252620, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
-      propertyPath: bulletFireRateUpdate
-      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2462774669217252621, guid: 69c9f462ab4330543a3791c62545b0cd, type: 3}
       propertyPath: m_RootOrder

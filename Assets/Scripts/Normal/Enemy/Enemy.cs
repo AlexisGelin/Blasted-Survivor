@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour, IHealth
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] Transform _canonTransform;
 
-    [SerializeField] List<SpriteRenderer> _sprites;
+    [SerializeField] protected List<SpriteRenderer> _sprites;
 
     Sequence _damageColorTweek;
     List<Sequence> _damageColorTweeks = new List<Sequence>();

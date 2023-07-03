@@ -53,32 +53,33 @@ MonoBehaviour:
   - enemyToAdd: 4
     enemyHealthToAdd: 0
   - enemyToAdd: 3
-    enemyHealthToAdd: 40
+    enemyHealthToAdd: 0
   - enemyToAdd: 5
-    enemyHealthToAdd: 10
+    enemyHealthToAdd: 15
   - enemyToAdd: 4
-    enemyHealthToAdd: 20
+    enemyHealthToAdd: 15
   - enemyToAdd: 6
-    enemyHealthToAdd: 0
+    enemyHealthToAdd: 15
   - enemyToAdd: 5
-    enemyHealthToAdd: 0
+    enemyHealthToAdd: 15
   - enemyToAdd: 3
-    enemyHealthToAdd: 30
-  - enemyToAdd: 4
-    enemyHealthToAdd: 20
-  - enemyToAdd: 5
-    enemyHealthToAdd: 0
-  - enemyToAdd: 6
     enemyHealthToAdd: 10
+  - enemyToAdd: 4
+    enemyHealthToAdd: 10
+  - enemyToAdd: 5
+    enemyHealthToAdd: 15
+  - enemyToAdd: 6
+    enemyHealthToAdd: 20
   - enemyToAdd: 1
-    enemyHealthToAdd: 30
-  - enemyToAdd: 9
-    enemyHealthToAdd: 0
-  - enemyToAdd: 4
     enemyHealthToAdd: 10
-  - enemyToAdd: 3
+  - enemyToAdd: 9
+    enemyHealthToAdd: 10
+  - enemyToAdd: 4
     enemyHealthToAdd: 20
+  - enemyToAdd: 3
+    enemyHealthToAdd: 15
   _coinPerKill: {x: 10, y: 20}
   _probabilityShootEnemySpawn: 0.2
   _maxProbabilityShootEnemySpawn: 0.5
   NumberOfEnemyRemaining: 0
+  CurrentIndexOfWaves: 0

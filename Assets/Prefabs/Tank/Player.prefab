@@ -47,7 +47,7 @@ GameObject:
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -79,10 +79,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0629e7993b9ed4a85290c00f108c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: 6bc315c26bb80074e8be1f68cb5f7486, type: 2}
+  IsInteract: 0
+  PlayerVelocity: {x: 0, y: 0, z: 0}
+  _data: {fileID: 11400000, guid: 352c1e25cd820514a8f9ee1f8d0d2a33, type: 2}
   _upgradeData: {fileID: 11400000, guid: b4e4f85f987dc45479b0aa96fec1c2db, type: 2}
-  _rb: {fileID: 2462774669217252622}
+  Rb: {fileID: 2462774669217252622}
   _renderer: {fileID: 2462774668884844056}
+  _healthRegenLevel: 0
+  _healthLevel: 0
+  _bodyDamageLevel: 0
+  _bulletSpeedLevel: 0
+  _bulletPenetrationLevel: 0
+  _bulletDamageLevel: 0
+  _bulletReloadLevel: 0
+  _movementSpeedLevel: 0
+  _upgradePoint: 0
 --- !u!50 &2462774669217252622
 Rigidbody2D:
   serializedVersion: 4

@@ -52,6 +52,6 @@ MonoBehaviour:
   bodyDamageUpgrade: 25
   bulletSpeedUpgrade: 0.5
   bulletPenetrationUpdate: 1
-  bulletDamageUpdate: 25
+  bulletDamageUpdate: 20
   bulletFireRateUpdate: 0.04
   speedUpdate: 0.25

@@ -10,7 +10,7 @@ public class EnemyShoot : Enemy
     [SerializeField] float _durationBeforeFirstShoot;
     [SerializeField] LayerMask _layerMask;
     [SerializeField] Transform _renderer;
-
+    [SerializeField] Transform bulletInstantiation;
     TankRenderer _tankRenderer;
 
     float _nextFire = 0.0f;
@@ -18,7 +18,7 @@ public class EnemyShoot : Enemy
     bool isFirstShoot;
 
     List<Sequence> _canonSequences = new List<Sequence>();
-    List<Vector2> _canonTransforms = new List<Vector2>();
+    [SerializeField] List<Transform> _canonTransforms = new List<Transform>();
     Coroutine mooveEnemyAndShoot;
     public override void Init(int hpToIncrease)
     {
@@ -26,7 +26,7 @@ public class EnemyShoot : Enemy
 
         isFirstShoot = true;
         _tankRenderer = _data.Renderer;
-
+        //_canonTransforms = _tankRenderer._canonTransforms;
         if (_tankRenderer != null)
         {
             foreach (Transform TankRenderer in _tankRenderer._canonTransforms)
@@ -36,15 +36,6 @@ public class EnemyShoot : Enemy
             //Destroy(_tankRenderer.gameObject);
         }
 
-        var tempRenderer = Instantiate(_data.Renderer.Renderer, _renderer);
-        _tankRenderer = tempRenderer.GetComponent<TankRenderer>(); //Here
-
-        _canonTransforms.Clear();
-
-        foreach (var canon in _tankRenderer._canonTransforms)
-        {
-            _canonTransforms.Add(canon.localPosition);
-        }
 
         mooveEnemyAndShoot = StartCoroutine(MooveEnemyAndShoot());
     }
@@ -92,21 +83,22 @@ public class EnemyShoot : Enemy
 
                             _canonSequences.Clear();
 
-                            for (int i = 0; i < _tankRenderer._canonTransforms.Count; i++)
+                            GameObject bullet = PoolManager.Instance.GetPooledObject(1);
+                            _bullet = bullet.GetComponent<BulletEnemy>();
+
+                            bullet.transform.position = bulletInstantiation.position;
+                            bullet.SetActive(true);
+
+                            _bullet.Init(_data.Bullet, bulletInstantiation.up * -1);
+
+                            for (int i = 0; i < _canonTransforms.Count; i++)
                             {
-                                var currentCannon = _tankRenderer._canonTransforms[i];
+                                var currentCannon = _canonTransforms[i];
                                 //print(currentCannon.position);
-                                GameObject bullet = PoolManager.Instance.GetPooledObject(1);
-                                _bullet = bullet.GetComponent<BulletEnemy>();
 
-                                bullet.transform.position = currentCannon.position;
-                                bullet.SetActive(true);
+                                //currentCannon.transform.localPosition = new Vector3(_canonTransforms[i].position.x, _canonTransforms[i].position.y);
 
-                                _bullet.Init(_data.Bullet, currentCannon.transform.right);
-
-                                currentCannon.transform.localPosition = new Vector3(_canonTransforms[i].x, _canonTransforms[i].y);
-
-                                _tankRenderer.ShootFX[i].Play();
+                                _tankRenderer.ShootFX[0].Play();
 
                                 var newSeq = DOTween.Sequence()
                                    .Join(currentCannon.transform.DOLocalMoveX(currentCannon.transform.localPosition.x - .05f, .05f).SetEase(Ease.OutSine))
