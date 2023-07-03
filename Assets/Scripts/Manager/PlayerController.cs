@@ -116,7 +116,7 @@ public class PlayerController : MonoSingleton<PlayerController>, IHealth
 
         if (_playerInput.Player.Fire.IsPressed()) Fire();
 
-        if (Input.GetKeyDown(KeyCode.G)) TakeDamage(10);
+       /* if (Input.GetKeyDown(KeyCode.G)) TakeDamage(10);*/
     }
 
     private void FixedUpdate()

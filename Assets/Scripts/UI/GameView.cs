@@ -44,10 +44,10 @@ public class GameView : View
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.U))
+ /*       if (Input.GetKeyUp(KeyCode.U))
         {
             AddPoint(2);
-        }
+        }*/
     }
 
     void OpenUpgrades()

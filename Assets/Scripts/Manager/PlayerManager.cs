@@ -37,11 +37,11 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     private void Update()
     {
         if (GameManager.Instance.IsGamePause == false && GameManager.Instance.GameState == GameState.PLAY) _totalTime += Time.deltaTime;
-
+/*
         if (Input.GetKeyDown(KeyCode.C))
         {
             UpdateCoins(1000);
-        }
+        }*/
     }
 
 
